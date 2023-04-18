@@ -1,4 +1,4 @@
-package com.jmblog.freeblog_admin;
+package com.service.freeblog_admin;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

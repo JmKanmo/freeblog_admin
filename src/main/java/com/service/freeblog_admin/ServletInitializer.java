@@ -1,4 +1,4 @@
-package com.jmblog.freeblog_admin;
+package com.service.freeblog_admin;
 
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
