@@ -1,8 +1,8 @@
 plugins {
-	id 'java'
-	id 'war'
-	id 'org.springframework.boot' version '2.7.10'
-	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id 'java'
+    id 'war'
+    id 'org.springframework.boot' version '2.7.10'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
 group = 'com.jmblog'
@@ -10,39 +10,42 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
 }
 
 repositories {
-	mavenCentral()
+    mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
-	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
-	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.springframework.boot:spring-boot-starter-web-services'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
-	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	annotationProcessor 'org.projectlombok:lombok'
-	providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.3.0'
+    implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    annotationProcessor 'org.projectlombok:lombok'
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.9'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-security', version: '1.6.9'
 
-	// AWS SDK
-	implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
-	implementation 'com.amazonaws:aws-java-sdk-s3'
+    // AWS SDK
+    implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
+    implementation 'com.amazonaws:aws-java-sdk-s3'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+    useJUnitPlatform()
 }
