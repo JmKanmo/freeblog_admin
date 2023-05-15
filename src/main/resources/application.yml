@@ -13,6 +13,10 @@ server:
     max-http-form-post-size: 50MB
 
 spring:
+  security:
+    user:
+      name: ${ADMIN_USER_ID}
+      password: ${ADMIN_USER_PW}
   mvc:
     hiddenmethod:
       filter:

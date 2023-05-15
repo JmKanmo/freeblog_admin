@@ -1,6 +1,6 @@
 package com.service.freeblog_admin.config.security;
 
-import com.service.util.BlogUtil;
+import com.service.freeblog_admin.util.BlogAdminUtil;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.SavedRequestAwareAuthenticationSuccessHandler;
 
@@ -23,7 +23,7 @@ public class UserAuthenticationSuccessHandler extends SavedRequestAwareAuthentic
             String redirectUrl = (String) session.getAttribute("prevPage");
             if (redirectUrl != null) {
                 session.removeAttribute("prevPage");
-                getRedirectStrategy().sendRedirect(request, response, BlogUtil.mappingRedirectUrl(redirectUrl));
+                getRedirectStrategy().sendRedirect(request, response, BlogAdminUtil.mappingRedirectUrl(redirectUrl));
             } else {
                 super.onAuthenticationSuccess(request, response, authentication);
             }

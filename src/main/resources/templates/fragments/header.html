@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<header th:fragment="header" class="header">
+    <div class="header_box clear_fix">
+        <!-- logo-box -->
+        <div class="logo_box_div">
+            <div th:replace="fragments/common.html :: logo_layout"></div>
+        </div>
+
+        <div class="user_util_box">
+            <ul class="user_util_list">
+                <!-- 추후에 dark/light 모드 기능 구현 후, 활성화 예정
+                <li class="user_util_item center_fix">
+                    <button type="button" class="day_night_skin_button" id="day_night_skin_button" title="모드 변경">
+                        <img src="/images/sun.gif"/>
+                        <span class="blind">모드 변경</span>
+                    </button>
+                </li>
+                -->
+
+                <li class="user_util_item center_fix">
+                    <button type="button" title="좋아요누른 글" class="header_util_button" id="like_post_button">
+                        <img src="/images/like_posts.png"/>
+                        <span class="blind">좋아요누른 글</span>
+                    </button>
+
+                    <div class="user_like_post_option_container">
+                        <div class="user_like_post_notice_container">
+                            <span class="user_like_post_notice_text" id="user_like_post_notice_text">
+                                * 30일이 지난 게시글은 삭제 됩니다
+                            </span>
+                        </div>
+
+                        <button class="user_like_post_block_reload_button" id="user_like_post_block_reload_button">
+                            <img class="common_button_image_style user_like_post_block_reload_button_image"
+                                 id="user_like_post_block_reload_button_image"
+                                 src="../images/reload.png" alt="" title="새로고침">
+                            <span class="blind">닫기 버튼</span>
+                        </button>
+
+                        <button class="user_like_post_block_close_button" id="user_like_post_block_close_button">
+                            <img class="common_button_image_style user_like_post_block_close_button_image"
+                                 src="../images/close.png" alt="" title="닫기">
+                            <span class="blind">닫기 버튼</span>
+                        </button>
+
+                        <th:block sec:authorize="isAuthenticated()">
+                            <button class="user_like_post_block_delete_all_button"
+                                    id="user_like_post_block_delete_all_button" th:value="${user_header.id}">
+                                전체삭제
+                            </button>
+                        </th:block>
+                    </div>
+
+                    <div class="user_like_post_container" id="user_like_post_container">
+                        <!-- 사용자가 좋아유 누른 게시글 템플릿 -->
+                    </div>
+                </li>
+
+                <li class="user_util_item center_fix">
+                    <button type="button" title="공지알림" class="header_util_button" id="notice_button">
+                        <img src="/images/notice_bell.png"/>
+                        <span class="blind">공지 알림</span>
+                    </button>
+                </li>
+
+                <li class="user_util_item">
+                    <a href="/user/login" sec:authorize="!isAuthenticated()" class="login_button" id="login_button">
+                        로그인
+                        <span class="blind">로그인</span>
+                    </a>
+                    <button type="button" sec:authorize="isAuthenticated()" class="user_profile_button"
+                            id="user_profile_button">
+                        <img id="header_profile_image" class="header_profile_image" th:src="${#strings.isEmpty(user_header.profileImages) or #strings.equals(user_header.profileImages,'<<<undefined>>>')
+                        ? '/images/user_default_thumbnail.png' : user_header.profileImages}"/>
+                        <span class="blind">프로필</span>
+                    </button>
+                </li>
+            </ul>
+
+            <th:block th:if="${user_header != null}">
+                <ul class="user_option_div" id="user_option_div">
+                    <li class="user_option_item">
+                        <a class="user_option_link" th:href="'/blog/' + ${user_header.id}">내 블로그</a>
+                    </li>
+
+                    <li class="user_option_item">
+                        <a class="user_option_link" href="/settings">설정</a>
+                    </li>
+
+                    <li class="user_option_item">
+                        <a class="user_option_link" href="/user/logout">로그아웃</a>
+                    </li>
+                </ul>
+            </th:block>
+
+            <th:block th:if="${user_header == null}">
+                <ul class="user_option_div" id="user_option_div">
+                    <li class="user_option_item">
+                        <a class="user_option_link" th:href="'/blog?id=undefined'">내 블로그</a>
+                    </li>
+
+                    <li class="user_option_item">
+                        <a class="user_option_link" href="/settings">내정보 관리</a>
+                    </li>
+
+                    <li class="user_option_item">
+                        <a class="user_option_link" href="/user/logout">로그아웃</a>
+                    </li>
+                </ul>
+            </th:block>
+        </div>
+    </div>
+</header>
+</html>

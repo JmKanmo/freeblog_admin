@@ -8,6 +8,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
 public class BlogAdminUtil {
+    public static String mappingRedirectUrl(String redirectUrl) {
+//        if (redirectUrl.endsWith("/user/email-auth")
+//                || redirectUrl.endsWith("/user/update/password")) {
+//            return "/";
+//        }
+        return redirectUrl;
+    }
+
     public static String getLoginFailMessage(AuthenticationException exception) {
         if (exception instanceof AuthenticationServiceException) {
             return ServiceExceptionMessage.FAILED_AUTHENTICATION.message();
