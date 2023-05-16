@@ -18,7 +18,7 @@ import java.security.Principal;
 @Tag(name = "어드민", description = "어드민 관련 API")
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/admin")
+@RequestMapping("/")
 @Slf4j
 public class AdminController {
     @Operation(summary = "블로그 페이지 반환", description = "블로그 페이지를 반환하는 GET 메서드")
@@ -26,7 +26,7 @@ public class AdminController {
             @ApiResponse(responseCode = "200", description = "블로그,사용자 정보가 담긴 블로그 페이지")
     })
     @GetMapping
-    public String blog(@PathVariable String id, Model model, Principal principal, HttpServletRequest httpServletRequest) throws Exception {
+    public String blog(Model model, Principal principal, HttpServletRequest httpServletRequest) throws Exception {
         if (principal != null) {
             // TODO 접속 예외 반환
         }

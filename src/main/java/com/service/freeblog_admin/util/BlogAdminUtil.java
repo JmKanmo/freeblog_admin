@@ -4,6 +4,7 @@ import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.BlogAdminServiceException;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.*;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
@@ -14,6 +15,14 @@ public class BlogAdminUtil {
 //            return "/";
 //        }
         return redirectUrl;
+    }
+
+    public static String redirect(String url) {
+        return String.format("redirect:%s", url);
+    }
+
+    public static boolean isAuth(Authentication authentication) {
+        return authentication != null && authentication.isAuthenticated();
     }
 
     public static String getLoginFailMessage(AuthenticationException exception) {
