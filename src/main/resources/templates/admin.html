@@ -3,8 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <title>관리자 페이지</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/admin/admin.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/admin/admin.js}"></script>
 </head>
+
 <body>
-<!-- TODO 로그인 성공 시에 보여지는 어드민 페이지 구성 -->
+<div th:replace="fragments/header::header"></div>
+<div class="admin_container">
+    <div class="admin_container_div clear_fix">
+        <div class="admin_title_container">
+            <h3 class="blog_title_text">관리자 페이지</h3>
+        </div>
+
+        <ul class="admin_menu_list">
+            <li>
+                <a class="admin_menu_link" href="/">공지 사항</a>
+            </li>
+
+            <li>
+                <a class="admin_menu_link" href="/">음악 관리</a>
+            </li>
+
+            <li>
+                <a class="admin_menu_link" href="/">신고 관리</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div th:replace="fragments/footer::footer"></div>
 </body>
 </html>

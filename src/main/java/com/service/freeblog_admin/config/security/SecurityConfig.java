@@ -1,6 +1,6 @@
 package com.service.freeblog_admin.config.security;
 
-import com.service.freeblog_admin.web.service.user.UserService;
+import com.service.freeblog_admin.web.service.admin.AdminUserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
@@ -18,7 +18,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableWebSecurity
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserService userService;
+    private final AdminUserService adminUserService;
 
     @Bean
     PasswordEncoder getPasswordEncoder() {
@@ -59,7 +59,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().sameOrigin()
                 .and()
                 .authorizeRequests().antMatchers(
-                        "/user/login", "/user/signup"
+                        "/",
+                        // user
+                        "/user/login", "/user/signup",
+                        // error
+                        "/error/**"
                 )
                 .permitAll()
                 .and()
@@ -73,7 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService)
+        auth.userDetailsService(adminUserService)
                 .passwordEncoder(getPasswordEncoder());
         super.configure(auth);
     }

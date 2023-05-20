@@ -24,6 +24,7 @@ public enum ServiceExceptionMessage {
     NOT_AUTHENTICATED_ACCOUNT("이메일 인증이 완료되지 않은 계정 입니다."),
     WITHDRAW_ACCOUNT("탈퇴 된 계정입니다."),
     STOP_ACCOUNT("정지 된 계정입니다."),
+    NOT_AUTH_ACCESS("인증되지 않은 접속입니다."),
     FAILED_AUTHENTICATION("인증에 실패하였습니다.");
     private final String message;
 

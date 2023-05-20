@@ -10,61 +10,6 @@
 
         <div class="user_util_box">
             <ul class="user_util_list">
-                <!-- 추후에 dark/light 모드 기능 구현 후, 활성화 예정
-                <li class="user_util_item center_fix">
-                    <button type="button" class="day_night_skin_button" id="day_night_skin_button" title="모드 변경">
-                        <img src="/images/sun.gif"/>
-                        <span class="blind">모드 변경</span>
-                    </button>
-                </li>
-                -->
-
-                <li class="user_util_item center_fix">
-                    <button type="button" title="좋아요누른 글" class="header_util_button" id="like_post_button">
-                        <img src="/images/like_posts.png"/>
-                        <span class="blind">좋아요누른 글</span>
-                    </button>
-
-                    <div class="user_like_post_option_container">
-                        <div class="user_like_post_notice_container">
-                            <span class="user_like_post_notice_text" id="user_like_post_notice_text">
-                                * 30일이 지난 게시글은 삭제 됩니다
-                            </span>
-                        </div>
-
-                        <button class="user_like_post_block_reload_button" id="user_like_post_block_reload_button">
-                            <img class="common_button_image_style user_like_post_block_reload_button_image"
-                                 id="user_like_post_block_reload_button_image"
-                                 src="../images/reload.png" alt="" title="새로고침">
-                            <span class="blind">닫기 버튼</span>
-                        </button>
-
-                        <button class="user_like_post_block_close_button" id="user_like_post_block_close_button">
-                            <img class="common_button_image_style user_like_post_block_close_button_image"
-                                 src="../images/close.png" alt="" title="닫기">
-                            <span class="blind">닫기 버튼</span>
-                        </button>
-
-                        <th:block sec:authorize="isAuthenticated()">
-                            <button class="user_like_post_block_delete_all_button"
-                                    id="user_like_post_block_delete_all_button" th:value="${user_header.id}">
-                                전체삭제
-                            </button>
-                        </th:block>
-                    </div>
-
-                    <div class="user_like_post_container" id="user_like_post_container">
-                        <!-- 사용자가 좋아유 누른 게시글 템플릿 -->
-                    </div>
-                </li>
-
-                <li class="user_util_item center_fix">
-                    <button type="button" title="공지알림" class="header_util_button" id="notice_button">
-                        <img src="/images/notice_bell.png"/>
-                        <span class="blind">공지 알림</span>
-                    </button>
-                </li>
-
                 <li class="user_util_item">
                     <a href="/user/login" sec:authorize="!isAuthenticated()" class="login_button" id="login_button">
                         로그인
