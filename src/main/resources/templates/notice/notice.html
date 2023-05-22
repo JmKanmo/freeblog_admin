@@ -2,9 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>공지사항 페이지</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/notice/notice.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/notice/notice.js}"></script>
 </head>
-<body>
 
+<body>
+<div th:replace="fragments/header::header"></div>
+<div class="notice_container">
+    <div class="notice_container_div clear_fix">
+        <div class="notice_title_container">
+            <h3 class="blog-admin-title-style">공지사항 관리</h3>
+        </div>
+
+        <ul class="notice_menu_list">
+            <li>
+                <a class="notice_menu_link" href="/">공지 사항 수정</a>
+            </li>
+
+            <li>
+                <a class="notice_menu_link" href="/">공지사항 목록</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div th:replace="fragments/footer::footer"></div>
 </body>
 </html>

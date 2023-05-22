@@ -558,16 +558,17 @@ input:focus {
 }
 
 /* blog title style */
-.blog-title-style {
+.blog-admin-title-style {
     display: inline-block;
     background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
-    font-size: 3rem;
+    font-size: 25px;
     -webkit-background-clip: text !important;
     color: transparent;
     cursor: pointer;
+    font-weight: bold;
 }
 
-.blog-title-style:hover {
+.blog-admin-title-style:hover {
     display: inline-block;
     background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
     -webkit-background-clip: text !important;

@@ -1,4 +1,39 @@
 package com.service.freeblog_admin.web.controller.notice;
 
+import com.service.freeblog_admin.util.BlogAdminUtil;
+import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
+import com.service.freeblog_admin.web.error.model.AdminException;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
+
+@Tag(name = "공지사항", description = "공지사항 관련 API")
+@RequiredArgsConstructor
+@Controller
+@RequestMapping("/notice")
+@Slf4j
 public class NoticeController {
+    @Operation(summary = "공지사항 페이지 반환", description = "공지사항 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 정보가 담긴 블로그 페이지")
+    })
+    @GetMapping
+    public String notice(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        return "notice/notice";
+    }
 }

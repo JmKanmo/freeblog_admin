@@ -17,15 +17,6 @@
     padding-bottom: 15px;
 }
 
-.admin_container .admin_container_div .admin_title_container .blog_title_text {
-    display: inline-block;
-    background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
-    -webkit-background-clip: text !important;
-    color: transparent;
-    font-size: 25px;
-    font-weight: bold;
-}
-
 .admin_container .admin_page_title {
     font-size: 23px;
     color: #666666;
