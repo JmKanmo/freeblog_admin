@@ -61,7 +61,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests().antMatchers(
                         "/",
                         // user
-                        "/user/login", "/user/signup",
+                        "/user/login", "/user/signup", "/user/update/password",
+                        "/user/check-id", "/user/check-email",
                         // error
                         "/error/**"
                 )

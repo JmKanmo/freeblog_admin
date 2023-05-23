@@ -26,4 +26,8 @@ public class AdminUserSignupInput {
     @NotBlank(message = "닉네임은 공백만 올 수 없습니다")
     @Size(max = 20, message = "닉네임은 최대 20글자 까지 작성 가능합니다.")
     private final String nickname;
+
+    private final boolean emailCheckFlag;
+
+    private final boolean idCheckFlag;
 }

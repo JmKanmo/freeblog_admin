@@ -25,7 +25,7 @@ public class ExceptionHandlerAdvice {
         String errorMsg = BlogAdminUtil.getErrorMessage(exception);
         model.addAttribute("error", errorMsg);
         if (errorMsg == ConstUtil.UNDEFINED_ERROR) {
-            log.error("[freeblog-fileSizeLimitExceededHandler] MaxUploadSizeExceededException occurred ", exception);
+            log.error("[freeblog_admin-fileSizeLimitExceededHandler] MaxUploadSizeExceededException occurred ", exception);
         }
         return "error/error-page";
     }
@@ -35,7 +35,7 @@ public class ExceptionHandlerAdvice {
     public ResponseEntity<ExceptionDto> httpRequestMethodNotSupportedHandler(Exception exception, Model model, HttpServletResponse httpServletResponse) {
         String errorMsg = BlogAdminUtil.getErrorMessage(exception);
         if (errorMsg == ConstUtil.UNDEFINED_ERROR) {
-            log.error("[freeblog-httpRequestMethodNotSupportedHandler] HttpRequestMethodNotSupportedException occurred ", exception);
+            log.error("[freeblog_admin-httpRequestMethodNotSupportedHandler] HttpRequestMethodNotSupportedException occurred ", exception);
         }
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                 .body(ExceptionDto.builder().statusCode(HttpServletResponse.SC_INTERNAL_SERVER_ERROR)
@@ -49,7 +49,7 @@ public class ExceptionHandlerAdvice {
         String errorMsg = BlogAdminUtil.getErrorMessage(exception);
         model.addAttribute("error", errorMsg);
         if (errorMsg == ConstUtil.UNDEFINED_ERROR) {
-            log.error("[freeblog-fileSizeLimitExceededHandler] TemplateEngineException occurred ", exception);
+            log.error("[freeblog_admin-fileSizeLimitExceededHandler] TemplateEngineException occurred ", exception);
         }
         return "error/error-page";
     }
@@ -60,7 +60,7 @@ public class ExceptionHandlerAdvice {
         String errorMsg = BlogAdminUtil.getErrorMessage(exception);
         model.addAttribute("error", errorMsg);
         if (errorMsg == ConstUtil.UNDEFINED_ERROR) {
-            log.error("[freeblog-exceptionHandler] exception occurred ", exception);
+            log.error("[freeblog_admin-exceptionHandler] exception occurred ", exception);
         }
         return "error/error-page";
     }

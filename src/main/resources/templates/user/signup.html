@@ -17,7 +17,8 @@
 
     <h1 class="common_form_title">회원정보 입력</h1>
 
-    <form th:object="${userSignUpInput}" method="post" class="signup_form common_form" enctype="multipart/form-data"
+    <form th:object="${adminUserSignUpInput}" method="post" class="signup_form common_form"
+          enctype="multipart/form-data"
           id="user_signup_form" name="signupForm">
 
         <div class="input_div common_input_div clear_fix">
@@ -89,37 +90,6 @@
         <div class="spel_div">
             <span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}" id="user_nickname_validation_error"
                   class="validation_error"></span>
-        </div>
-
-        <div class="input_div common_input_div greeting_textarea_block clear_fix">
-            <label for="user_greeting_textarea" class="common_input_label common_greetings_label">
-                <span class="blind">인사말</span>
-            </label>
-
-            <textarea name="greeting" id="user_greeting_textarea" class="common_input_form user_info_greetings"
-                      cols="30"
-                      rows="10"
-                      maxlength="128"
-                      th:field="*{greetings}"
-                      placeholder="사용자 인사말을 입력해주세요. (최대 128글자 입력 가능)" required></textarea>
-
-            <div class="greeting_edit_count_block">
-                <span class="current_text_count common_gray_text" id="current_text_count">0</span>
-                <span class="common_plain_text">/</span>
-                <span class="common_gray_text max_limit_text_count">128</span>
-            </div>
-
-            <span class="greeting_limit_warn validation_error" id="greeting_limit_warn">글자수는 128 글자를 넘어갈 수 없습니다.</span>
-        </div>
-
-        <div class="spel_div">
-            <span th:if="${#fields.hasErrors('greetings')}" th:errors="*{greetings}"
-                  id="user_greetings_validation_error" class="validation_error"></span>
-        </div>
-
-        <div class="spel_div">
-            <span th:if="${#fields.hasErrors('greetings')}" th:errors="*{greetings}"
-                  id="user_intro_validation_error" class="validation_error"></span>
         </div>
 
         <button type="submit" class="common_submit_button">

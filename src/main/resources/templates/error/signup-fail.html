@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 실패</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+
+    <style>
+        .fail_board {
+            min-width: 988px;
+            min-height: 500px;
+            border: 1px solid #e3e3e3;
+            text-align: center;
+            margin: 0 auto;
+        }
+
+        .fail_board .logo_box .logo_link {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            width: 160px;
+            margin: 0 auto;
+        }
+
+        .fail_board .fail_message {
+            margin-top: 20px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .fail_board .caution {
+            color: #333;
+            font-weight: bold;
+            font-size: 18px;
+            padding-bottom: 20px;
+        }
+
+        .fail_board .caution_message {
+            font-size: 15px;
+            font-weight: normal;
+            color: darkcyan;
+        }
+
+        .fail_board .back_link {
+            color: green;
+            font-weight: bold;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+<div class="fail_board">
+    <div id = "top" class="logo_box">
+        <a href="/" title="freeblog" class="logo_link clear_fix">
+            <img class="logo_img" src="/images/logo.png">
+            <span class="logo_name">freeblog</span>
+            <span class="blind">로고(프리로그)</span>
+        </a>
+    </div>
+    <p class="fail_message">회원 가입에 실패하였습니다.</p>
+    <p class="fail_message" th:if="${error == null} or ${#strings.isEmpty(error)} eq true">알수없음</p>
+    <p class="caution" th:if="${#strings.isEmpty(error)} eq false"><span class="caution_message" th:text="${error}">오류메시지</span>
+    </p>
+    <a class="back_link" href="/user/signup">회원가입 다시 진행</a>
+    <a style="margin-left: 20px;" class="back_link" href="/">홈으로 돌아가기</a>
+</div>
+</body>
+</html>

@@ -23,6 +23,19 @@ import java.util.List;
 public class AdminUserService implements UserDetailsService {
     private final AdminUserRepository adminUserRepository;
 
+    public boolean checkSameEmail(String email) {
+        if (checkUserDomainByEmail(email)) {
+            throw new AdminUserException(ServiceExceptionMessage.ALREADY_SAME_EMAIL.message());
+        }
+        return true;
+    }
+
+    public boolean checkSameId(String id) {
+        if (checkUserDomainById(id)) {
+            throw new AdminUserException(ServiceExceptionMessage.ALREADY_SAME_ID.message());
+        }
+        return true;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -40,5 +53,13 @@ public class AdminUserService implements UserDetailsService {
     @Transactional
     public void withdraw(AdminUser adminUser) {
         adminUserRepository.delete(adminUser);
+    }
+
+    public boolean checkUserDomainByEmail(String email) {
+        return adminUserRepository.findByEmail(email).isPresent();
+    }
+
+    public boolean checkUserDomainById(String id) {
+        return adminUserRepository.findById(id).isPresent();
     }
 }

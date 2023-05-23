@@ -1,7 +1,9 @@
 package com.service.freeblog_admin.web.domain.admin;
 
 
+import com.service.freeblog_admin.web.model.admin.AdminUserSignupInput;
 import lombok.*;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
 
@@ -22,5 +24,14 @@ public class AdminUser {
 
     private String email;
 
-    private String name;
+    private String nickname;
+
+    public static AdminUser from(AdminUserSignupInput adminUserSignupInput) {
+        return AdminUser.builder()
+                .userId(adminUserSignupInput.getId())
+                .email(adminUserSignupInput.getEmail())
+                .nickname(adminUserSignupInput.getNickname())
+                .password(BCrypt.hashpw(adminUserSignupInput.getPassword(), BCrypt.gensalt()))
+                .build();
+    }
 }
