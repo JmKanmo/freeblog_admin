@@ -1,11 +1,13 @@
 package com.service.freeblog_admin.web.domain.admin;
 
 
+import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.model.admin.AdminUserSignupInput;
 import lombok.*;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -15,7 +17,7 @@ import javax.persistence.*;
 @Table(name = "AdminUser", indexes = {
         @Index(name = "user_idx_email", columnList = "email")
 })
-public class AdminUser {
+public class AdminUser extends BaseTimeEntity {
     @Id
     @Column(name = "user_id")
     private String userId;

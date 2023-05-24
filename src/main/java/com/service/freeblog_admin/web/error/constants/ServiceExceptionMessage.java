@@ -7,6 +7,7 @@ public enum ServiceExceptionMessage {
     AUTH_VALID_KEY_MISMATCH("발급 된 인증키 정보가 일치하지 않습니다."),
     RE_PASSWORD_MISMATCH("비밀번호, 재비밀번호 입력 정보가 일치하지 않습니다."),
     COINCIDE_WITH_EACH_PASSWORD("입력한 비밀번호와 변경 전 비밀번호가 일치합니다"),
+    SECRET_KEY_MISMATCH("비밀키 정보가 일치하지 않습니다."),
     NOT_CHECKED_ID("ID 중복 검사를 완료하지 않았습니다."),
     ALREADY_SAME_ID("이미 사용중인 ID 입니다."),
     ALREADY_SAME_EMAIL("이미 사용중인 이메일 입니다."),

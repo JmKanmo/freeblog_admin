@@ -83,6 +83,10 @@ public class UserController {
                 }
                 throw new AdminUserException(String.join(",", stringList));
             }
+
+            if (!adminUserService.checkSecretKey(adminSignupForm.getSecretKey())) {
+                throw new AdminUserException(ServiceExceptionMessage.SECRET_KEY_MISMATCH.message());
+            }
             adminUserService.signUp(AdminUser.from(adminSignupForm));
         } catch (Exception e) {
             model.addAttribute("error", e.getMessage());

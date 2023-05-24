@@ -1,0 +1,55 @@
+.complete_container {
+    width: 988px;
+    margin: 0 auto;
+    padding: 10px 0 20px 0;
+    text-align: center;
+    border: 1px solid #eeeeee;
+}
+
+.complete_container .signup_complete_notice_text {
+    color: #333;
+    font-weight: bold;
+    color: darkgreen;
+    padding-bottom: 10px;
+}
+
+.complete_container .signup_complete_text {
+    color: #333;
+    font-weight: bold;
+    color: #88ea9a;
+}
+
+.complete_container .menu_container {
+    width: 200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}
+
+.complete_container .menu_container a {
+    float: left;
+    font-weight: bold;
+    font-size: 16px;
+    text-decoration: underline;
+}
+
+.complete_container .menu_container .login_link {
+    color: white;
+}
+
+.login_button {
+    margin-left: 15px;
+    float: left;
+    padding: 7px 15px 7px 15px;
+    font-size: 1rem;
+    border-radius: 1rem;
+    border: none;
+    outline: none;
+    font-weight: bold;
+    word-break: keep-all;
+    background: #212529;
+    color: white;
+    transition: all 0.125s ease-in 0s;
+    cursor: pointer;
+}

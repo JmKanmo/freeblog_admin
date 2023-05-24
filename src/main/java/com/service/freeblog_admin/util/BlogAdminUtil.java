@@ -8,6 +8,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class BlogAdminUtil {
     public static String mappingRedirectUrl(String redirectUrl) {
 //        if (redirectUrl.endsWith("/user/email-auth")
@@ -57,4 +60,18 @@ public class BlogAdminUtil {
         return ConstUtil.UNDEFINED_ERROR;
     }
 
+    public static String formatLocalDateTimeToStr(LocalDateTime localDateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss");
+        return localDateTime != null ? localDateTime.format(formatter) : "";
+    }
+
+    public static String formatLocalDateTimeToStrByPattern(LocalDateTime localDateTime, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return localDateTime != null ? localDateTime.format(formatter) : "";
+    }
+
+    public static String formatLocalDateTimeToStr(LocalDateTime localDateTime, String pattern) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        return localDateTime != null ? localDateTime.format(formatter) : "";
+    }
 }
