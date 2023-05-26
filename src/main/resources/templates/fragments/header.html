@@ -19,35 +19,20 @@
                             id="user_profile_button">
                         <img id="header_profile_image" class="header_profile_image"
                              src='../images/user_default_thumbnail.png'/>
-                        <span th:text="${user_header.nickname} + '님 반갑습니다.'">소개말</span>
                         <span class="blind">프로필</span>
                     </button>
                 </li>
             </ul>
 
-            <th:block th:if="${user_header != null}">
-                <ul class="user_option_div" id="user_option_div">
-                    <li class="user_option_item">
-                        <a class="user_option_link" href="/user/settings">설정</a>
-                    </li>
+            <ul class="user_option_div" id="user_option_div" sec:authorize="isAuthenticated()">
+                <li class="user_option_item">
+                    <a class="user_option_link" href="/user/settings">설정</a>
+                </li>
 
-                    <li class="user_option_item">
-                        <a class="user_option_link" href="/user/logout">로그아웃</a>
-                    </li>
-                </ul>
-            </th:block>
-
-            <th:block th:if="${user_header == null}">
-                <ul class="user_option_div" id="user_option_div">
-                    <li class="user_option_item">
-                        <a class="user_option_link" href="/user/settings">내정보 관리</a>
-                    </li>
-
-                    <li class="user_option_item">
-                        <a class="user_option_link" href="/user/logout">로그아웃</a>
-                    </li>
-                </ul>
-            </th:block>
+                <li class="user_option_item">
+                    <a class="user_option_link" href="/user/logout">로그아웃</a>
+                </li>
+            </ul>
         </div>
     </div>
 </header>

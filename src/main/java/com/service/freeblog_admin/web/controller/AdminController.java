@@ -28,7 +28,7 @@ import java.security.Principal;
 @RequestMapping("/")
 @Slf4j
 public class AdminController {
-    private final AdminUserService adminUserService;
+
 
     @Operation(summary = "블로그 페이지 반환", description = "블로그 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
@@ -36,10 +36,6 @@ public class AdminController {
     })
     @GetMapping
     public String blog(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
-        if (BlogAdminUtil.isAuth(authentication)) {
-            AdminUserDto adminUserDto = adminUserService.findAdminUserDto(authentication.getName());
-            model.addAttribute("user_header", adminUserDto);
-        }
         return "admin";
     }
 }

@@ -2,6 +2,7 @@ package com.service.freeblog_admin.web.controller.user;
 
 import com.service.freeblog_admin.util.BlogAdminUtil;
 import com.service.freeblog_admin.web.domain.admin.AdminUser;
+import com.service.freeblog_admin.web.dto.admin.AdminUserDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.AdminUserException;
 import com.service.freeblog_admin.web.model.admin.AdminUserSignupInput;
@@ -33,6 +34,44 @@ import java.util.List;
 @Slf4j
 public class UserController {
     private final AdminUserService adminUserService;
+
+    @Operation(summary = "회원탈퇴 페이지", description = "회원탈퇴 페이지 반환 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "회원탈퇴 페이지")
+    })
+    @GetMapping("/withdraw")
+    public String withdraw(HttpServletRequest request, Model model, Authentication authentication) {
+        return "user/withdraw";
+    }
+
+    @Operation(summary = "비밀번호 변경 페이지", description = "비밀번호 변경 페이지 반환 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "비밀번호 변경 페이지")
+    })
+    @GetMapping("/update/password")
+    public String updatePassword(HttpServletRequest request, Model model, Authentication authentication) {
+        return "user/update/password";
+    }
+
+    @Operation(summary = "기본정보 변경 페이지", description = "기본정보 변경 페이지 반환 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "기본정보 변경 페이지")
+    })
+    @GetMapping("/update/basic-info")
+    public String updateBasicInfo(HttpServletRequest request, Model model, Authentication authentication) {
+        return "user/update/basic-info";
+    }
+
+    @Operation(summary = "설정 페이지", description = "설정 페이지 반환 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "설정 페이지")
+    })
+    @GetMapping("/settings")
+    public String setting(HttpServletRequest request, Model model, Authentication authentication) {
+        AdminUserDto adminUserDto = adminUserService.findAdminUserDto(authentication.getName());
+        model.addAttribute("user_setting", adminUserDto);
+        return "user/settings";
+    }
 
     @Operation(summary = "로그인 페이지", description = "로그인 페이지 반환 메서드")
     @ApiResponses(value = {
