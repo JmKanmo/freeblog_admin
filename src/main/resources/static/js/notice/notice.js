@@ -1,11 +1,22 @@
 class NoticeController extends UtilController {
     constructor() {
         super();
-        // TODO
+        this.noticeWriteButton = document.getElementById("notice_write_button");
+        this.noticeListButton = document.getElementById("notice_list_button");
     }
 
     initNoticeController() {
-        // TODO
+        this.initEventListener();
+    }
+
+    initEventListener() {
+        this.noticeWriteButton.addEventListener("click", evt => {
+            this.openPopUp(1080, 500, "/notice/write", 'popup');
+        });
+
+        this.noticeListButton.addEventListener("click", evt => {
+            this.openPopUp(1080, 500, "/notice/list", 'popup');
+        });
     }
 }
 

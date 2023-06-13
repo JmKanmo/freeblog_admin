@@ -36,4 +36,28 @@ public class NoticeController {
         }
         return "notice/notice";
     }
+
+    @Operation(summary = "공지사항 작성 페이지 반환", description = "공지사항 작성 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 작성 페이지 밚 ㅘㄴ")
+    })
+    @GetMapping("/write")
+    public String noticeWrite(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        return "notice/notice-write";
+    }
+
+    @Operation(summary = "공지사항 목록 페이지 반환", description = "공지사항 목록 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 목록 정보가 담긴 블로그 페이지")
+    })
+    @GetMapping("/list")
+    public String noticeList(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        return "notice/notice-write";
+    }
 }

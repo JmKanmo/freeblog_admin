@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>공지사항 페이지</title>
@@ -18,11 +18,11 @@
 
         <ul class="notice_menu_list">
             <li>
-                <a class="notice_menu_link" href="/">공지 사항 수정</a>
+                <button class="notice_menu_link" id="notice_write_button">공지 사항 작성</button>
             </li>
 
             <li>
-                <a class="notice_menu_link" href="/">공지사항 목록</a>
+                <button class="notice_menu_link" id="notice_list_button" href="noticeListButton">공지사항 목록</button>
             </li>
         </ul>
     </div>

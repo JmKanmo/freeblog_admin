@@ -42,6 +42,14 @@
 }
 
 .notice_container .notice_container_div .notice_menu_list .notice_menu_link {
+    border: none;
+    outline: none;
+    background-color: #ffffff;
     font-size: 15px;
     color: #666666;
+    cursor: pointer;
+}
+
+.notice_container .notice_container_div .notice_menu_list .notice_menu_link:hover {
+    text-decoration: underline;
 }
