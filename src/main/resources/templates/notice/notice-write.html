@@ -11,6 +11,43 @@
 </head>
 
 <body>
-hello world
+<div class="notice_write_container">
+    <form method="post" class="notice_write_form" id="notice_write_form" name="notice_write_form"
+          enctype="multipart/form-data" th:object="${noticeInput}">
+        <div class="notice_write_button_container clear_fix">
+            <button type="button" class="notice_write_button" id="notice_write_button">등록</button>
+
+            <div class="common_input_div input_block clear_fix">
+                <label for="notice_title" class="common_input_label common_blog_name_label" title="블로그명">
+                    <span class="blind">블로그이름</span>
+                </label>
+                <input type="text" id="notice_title" name="noticeName" class="notice_name_input" th:field="*{title}"
+                       maxlength="128" placeholder="제목을 입력해주세요. (최대 128글자)" required>
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span id="notice_name_validation_error" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                  class="validation_error"></span>
+            </div>
+
+
+            <div class="notice_write_block">
+                <div class="editor-board">
+                    <!-- Contents Here -->
+                    <div id="notice_write_editor" class="notice_write_editor">
+                        <!-- Contents Here -->
+                    </div>
+                    <button id="view-editor-source" type="button"
+                            class="common_source_view_label view_editor_source_button" title="텍스트 코드 보기"></button>
+                </div>
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" id="notice_write_validation_error"
+                  class="notice_write_validation_err validation_error"></span>
+            </div>
+        </div>
+    </form>
+</div>
 </body>
 </html>
