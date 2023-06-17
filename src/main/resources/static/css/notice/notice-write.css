@@ -1,0 +1,66 @@
+body {
+    background-color: #f7f7f7;
+    padding: 20px;
+}
+
+.notice_write_container {
+    margin: 0 auto;
+    width: 988px;
+    padding: 20px 20px 30px 20px;
+    background-color: #ffffff;
+    border: 1px solid #e9e9e9;
+}
+
+.notice_write_container .notice_write_top_container {
+    padding-bottom: 25px;
+}
+
+.notice_write_container .notice_write_form .input_block {
+    padding-bottom: 45px;
+}
+
+.notice_write_container .notice_write_form .notice_name_input {
+    border: 0;
+    border-bottom: 1px solid #9e9e9e;
+    width: 390px;
+    padding-bottom: 5px;
+    font-size: 14px;
+    margin-left: 10px;
+}
+
+.notice_write_container .notice_write_register_button {
+    float: right;
+    width: 90px;
+    height: 40px;
+    border: 1px solid #5eef7e;
+    background-color: #5eef7e;
+    font-size: 17px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.notice_write_container .notice_write_form .notice_write_block .editor-board {
+    position: relative;
+}
+
+.notice_write_container .notice_write_form .notice_write_block .editor-board .notice_write_editor {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    height: 600px;
+}
+
+
+.notice_write_container .notice_write_form .notice_write_block .view_editor_source_button {
+    position: absolute;
+    right: 20px;
+    bottom: 5px;
+    border: 0;
+    background-color: #ffffff;
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: 3;
+    cursor: pointer;
+}

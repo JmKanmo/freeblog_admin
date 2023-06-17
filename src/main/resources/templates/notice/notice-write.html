@@ -15,11 +15,13 @@
     <form method="post" class="notice_write_form" id="notice_write_form" name="notice_write_form"
           enctype="multipart/form-data" th:object="${noticeInput}">
         <div class="notice_write_button_container clear_fix">
-            <button type="button" class="notice_write_button" id="notice_write_button">등록</button>
+            <div class="notice_write_top_container clear_fix">
+                <button type="button" class="notice_write_register_button" id="notice_write_register_button">등록</button>
+            </div>
 
             <div class="common_input_div input_block clear_fix">
-                <label for="notice_title" class="common_input_label common_blog_name_label" title="블로그명">
-                    <span class="blind">블로그이름</span>
+                <label for="notice_title" class="common_input_label common_blog_name_label" title="공지사항 명">
+                    <span class="blind">공지사항 이름</span>
                 </label>
                 <input type="text" id="notice_title" name="noticeName" class="notice_name_input" th:field="*{title}"
                        maxlength="128" placeholder="제목을 입력해주세요. (최대 128글자)" required>
@@ -46,7 +48,13 @@
             <span th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" id="notice_write_validation_error"
                   class="notice_write_validation_err validation_error"></span>
             </div>
+
+            <input type="hidden" id="hidden_notice_title" name="title" th:field="*{title}">
+            <input type="hidden" id="hidden_notice_content" name="contents" th:field="*{contents}">
+            <input type="hidden" id="hidden_notice_summary" name="summary" th:field="*{summary}">
+            <input type="hidden" id="upload_key" name="uploadKey" th:field="*{uploadKey}">
         </div>
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>
 </div>
 </body>

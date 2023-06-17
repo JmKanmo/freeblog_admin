@@ -26,7 +26,15 @@ public enum ServiceExceptionMessage {
     WITHDRAW_ACCOUNT("탈퇴 된 계정입니다."),
     STOP_ACCOUNT("정지 된 계정입니다."),
     NOT_AUTH_ACCESS("인증되지 않은 접속입니다."),
-    FAILED_AUTHENTICATION("인증에 실패하였습니다.");
+    FAILED_AUTHENTICATION("인증에 실패하였습니다."),
+
+    // 공지 사항 관련 에러 메시지
+
+    // 기타 처리 관련 메시지
+    NOT_VALID_FORM_INPUT("폼 입력 정보가 양식 조건에 유효하지 않습니다."),
+    NOT_VALID_FILE_NAME("올바르지 않은 파일 명입니다.");
+
+
     private final String message;
 
     ServiceExceptionMessage(String message) {

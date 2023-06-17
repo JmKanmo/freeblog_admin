@@ -4,7 +4,7 @@ import com.service.freeblog_admin.config.admin.AdminUserConfig;
 import com.service.freeblog_admin.web.domain.admin.AdminUser;
 import com.service.freeblog_admin.web.dto.admin.AdminUserDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
-import com.service.freeblog_admin.web.error.model.AdminUserException;
+import com.service.freeblog_admin.web.error.model.admin.AdminUserException;
 import com.service.freeblog_admin.web.repository.admin.AdminUserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;

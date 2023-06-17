@@ -7,9 +7,13 @@ import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
+import java.util.UUID;
 
 public class BlogAdminUtil {
     public static String mappingRedirectUrl(String redirectUrl) {
@@ -47,6 +51,39 @@ public class BlogAdminUtil {
             return ServiceExceptionMessage.EXPIRED_PASSWORD.message();
         }
         return exception.getMessage();
+    }
+
+    public static LocalDateTime nowByZoneId() {
+        return LocalDateTime.now(ZoneId.of(ConstUtil.ASIA_SEOUL));
+    }
+
+    public static String getImageFileUUID(MultipartFile multipartFile) {
+        String fileName = multipartFile.getOriginalFilename();
+        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String uuid = LocalDateTime.now().toString() + UUID.nameUUIDFromBytes(fileName.getBytes(StandardCharsets.UTF_8)) + "." + extension;
+        return uuid;
+    }
+
+    public static String getImageFileUUIDBySftp(MultipartFile multipartFile) {
+        String fileName = multipartFile.getContentType();
+        String extension = getImageException(fileName.substring(fileName.lastIndexOf("/") + 1));
+        String uuid = UUID.randomUUID() + "." + extension;
+        return uuid;
+    }
+
+    public static String getImageException(String extension) {
+        if (extension == null || extension.isEmpty()) {
+            return "png";
+        }
+
+        switch (extension) {
+            case "jpeg":
+                return "jpg";
+            case "GIF":
+                return "gif";
+            default:
+                return extension;
+        }
     }
 
     public static String getErrorMessage(Exception exception) {

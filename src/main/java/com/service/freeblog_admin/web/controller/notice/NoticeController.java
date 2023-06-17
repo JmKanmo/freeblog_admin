@@ -2,7 +2,8 @@ package com.service.freeblog_admin.web.controller.notice;
 
 import com.service.freeblog_admin.util.BlogAdminUtil;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
-import com.service.freeblog_admin.web.error.model.AdminException;
+import com.service.freeblog_admin.web.error.model.admin.AdminException;
+import com.service.freeblog_admin.web.model.notice.NoticeInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -15,9 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import java.security.Principal;
 
 @Tag(name = "공지사항", description = "공지사항 관련 API")
 @RequiredArgsConstructor
@@ -46,6 +45,7 @@ public class NoticeController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+        model.addAttribute("noticeInput", NoticeInput.builder().build());
         return "notice/notice-write";
     }
 

@@ -7,6 +7,12 @@ class UtilController {
         this.idRegex = new RegExp('^[a-z]{1}[a-z0-9]{4,11}$');
         this.emailRegex = new RegExp('^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$');
         this.defaultUserProfileThumbnail = "../images/user_default_thumbnail.png";
+
+        // post
+        this.MAX_POST_CONTENT_SIZE = 10 * 1024 * 1024 // 압축사이즈: 10MB
+
+        // intro
+        this.MAX_INTRO_CONTENT_SIZE = 5 * 1024 * 1024; // 압축사이즈: 5MB
     }
 
     initHandlerbars() {
@@ -23,6 +29,9 @@ class UtilController {
         });
 
         Handlebars.registerHelper('getInnerText', tag => {
+            if (!tag) {
+                return 'UNDEFINED';
+            }
             return tag.replace(/(<([^>]+)>)/ig, "");
         });
 
@@ -57,6 +66,10 @@ class UtilController {
                 return name;
             }
         });
+    }
+
+    checkPostContentSize(content, size) {
+        return content > size;
     }
 
     getRemoveSpaceStr(str) {
@@ -181,6 +194,57 @@ class UtilController {
         let tops = (document.body.offsetHeight / 2) - (height / 2);
         left += window.screenLeft;
         return window.open(url, target, `width=${width}, height=${height}, left=${left}, top=${tops}`);
+    }
+
+    convertStrByteArr(obj, isEncode) {
+        if (isEncode === true) {
+            return obj.toString()
+        } else {
+            const parsed = obj.split(",");
+            const uint8Arr = new Uint8Array(parsed.length);
+            for (let i = 0; i < parsed.length; i++) {
+                let elem = parseInt(parsed[i]);
+                elem = (elem < 0) ? (elem * -1) : elem;
+                uint8Arr[i] = elem;
+            }
+            return uint8Arr;
+        }
+    }
+
+    /**
+     * Compress & Decompress string content
+     */
+    compressContent(content, isCompress) {
+        if (content == null) {
+            return "";
+        }
+
+        if (isCompress === true) {
+            const compressed = LZString.compressToBase64(content);
+            return !compressed ? content : compressed;
+        } else {
+            const decompressed = LZString.decompressFromBase64(content);
+            return (!decompressed || decompressed === 'P') ? content : decompressed;
+        }
+    }
+
+    /**
+     * HTML Content remove replace method
+     */
+    replaceAndSubHTMlTag(tag, limit) {
+        const result = (tag == null) ? "" : tag.replace(/(<([^>]+)>)/ig, '');
+        return limit <= 0 ? result : result.substring(0, limit);
+    }
+
+    /**
+     * Quill Editor Utils
+     * **/
+    getQuillHTML(htmlTag, data_gramm, contentEditable) {
+        return (
+            `<div class="ql-editor" data-gramm="${data_gramm}" contenteditable="${contentEditable}" data-placeholder="원하는 문장을 자유롭게 입력하세요. :)">` +
+            htmlTag +
+            `</div>`
+        );
     }
 
     getReadOnlyQuillEditor(id) {
@@ -764,5 +828,37 @@ class UtilController {
     clearInterval(interval, intervalKey) {
         clearInterval(interval);
         localStorage.removeItem(intervalKey);
+    }
+}
+
+/**
+ * 로그인 팝업 컨트롤러
+ */
+class LoginPopUpController extends UtilController {
+    constructor() {
+        super();
+
+        // pop up
+        this.formPopUpWindow = document.getElementById("formPopUp");
+        this.loginButton = document.getElementById("login_button");
+        this.popUpCloseButton = document.getElementById("closePopUpButton");
+    }
+
+    initLoginPopUpController() {
+        // login button event listener
+        if (this.loginButton != null) {
+            this.loginButton.addEventListener("click", evt => {
+                if (this.formPopUpWindow.style.display === '' || this.formPopUpWindow.style.display === 'none') {
+                    this.formPopUpWindow.style.display = 'block';
+                }
+            });
+        }
+
+        // login pop up event listener
+        if (this.popUpCloseButton != null) {
+            this.popUpCloseButton.addEventListener("click", evt => {
+                this.formPopUpWindow.style.display = 'none';
+            });
+        }
     }
 }

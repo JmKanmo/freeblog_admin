@@ -5,7 +5,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-group = 'com.jmblog'
+group = 'com.service.freeblog_admin'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -40,6 +40,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-ui', version: '1.6.9'
     implementation group: 'org.springdoc', name: 'springdoc-openapi-security', version: '1.6.9'
+    implementation group: 'com.jcraft', name: 'jsch', version: '0.1.55'
 
     // AWS SDK
     implementation platform('com.amazonaws:aws-java-sdk-bom:1.11.1000')
