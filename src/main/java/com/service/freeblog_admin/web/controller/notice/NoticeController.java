@@ -58,6 +58,6 @@ public class NoticeController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
-        return "notice/notice-write";
+        return "notice/notice-list";
     }
 }

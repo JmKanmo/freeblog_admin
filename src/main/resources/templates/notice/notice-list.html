@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="_csrf" th:content="${_csrf?.token}" th:if="${_csrf} ne null">
+    <meta name="_csrf_header" th:content="${_csrf?.headerName}" th:if="${_csrf} ne null">
+    <title>공지사항 목록</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/notice/notice-list.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/notice/notice-list.js}"></script>
 </head>
+
 <body>
 공지사항 목록
 </body>
+
 </html>

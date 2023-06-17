@@ -54,9 +54,30 @@ public class NoticeRestController {
             return ResponseEntity.status(HttpStatus.OK).body("공지사항 작성이 완료되었습니다. 작성 된 공지사항은 공지사항 목록에서 확인 바랍니다.");
         } catch (Exception exception) {
             if (BlogAdminUtil.getErrorMessage(exception) == ConstUtil.UNDEFINED_ERROR) {
-                log.error("[freeblog_admin-postWrite] exception occurred ", exception);
+                log.error("[freeblog_admin-writeNotice] exception occurred ", exception);
             }
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(String.format("공지 업로드에 실패하였습니다. %s", BlogAdminUtil.getErrorMessage(exception)));
+        }
+    }
+
+    @Operation(summary = "공지사항 페이징 기반 반환 API", description = "공지사항 페이징 기반 반환 API")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 정상 반환"),
+            @ApiResponse(responseCode = "500", description = "공지사항 반환 실패"),
+    })
+    @PostMapping("/list-page")
+    public ResponseEntity<?> listNotice(Principal principal) {
+        try {
+            if (principal == null || principal.getName() == null) {
+                throw new AdminException(ServiceExceptionMessage.NOT_LOGIN_STATUS_ACCESS.message());
+            }
+            //  TODO
+            return ResponseEntity.status(HttpStatus.OK).body("공지사항 반환 완료");
+        } catch (Exception exception) {
+            if (BlogAdminUtil.getErrorMessage(exception) == ConstUtil.UNDEFINED_ERROR) {
+                log.error("[freeblog_admin-listNotice] exception occurred ", exception);
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(String.format("공지사항 반환에 실패하였습니다. %s", BlogAdminUtil.getErrorMessage(exception)));
         }
     }
 }
