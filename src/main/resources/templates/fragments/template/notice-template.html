@@ -8,7 +8,17 @@
 
     <!-- 공지사항 목록 템플릿 -->
     <script id="notice-list-template" type="text/x-handlebars-template">
-        <!-- TODO -->
+        {{#each noticeDto}}
+            <li class="notice_board clear_fix">
+                    <span class="notice_board_text_style notice_board_title" id="notice_board_title">
+                        {{title}}
+                    </span>
+
+                <span class="notice_board_text_style notice_board_date" id="notice_board_date">
+                    {{registerTime}}
+                </span>
+            </li>
+        {{/each}}
     </script>
 </th:block>
 </html>
