@@ -14,6 +14,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,7 +27,7 @@ import javax.servlet.http.HttpServletRequest;
 public class NoticeController {
     @Operation(summary = "공지사항 페이지 반환", description = "공지사항 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "공지사항 정보가 담긴 블로그 페이지")
+            @ApiResponse(responseCode = "200", description = "공지사항 정보가 담긴 페이지")
     })
     @GetMapping
     public String notice(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
@@ -51,7 +52,7 @@ public class NoticeController {
 
     @Operation(summary = "공지사항 목록 페이지 반환", description = "공지사항 목록 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "공지사항 목록 정보가 담긴 블로그 페이지")
+            @ApiResponse(responseCode = "200", description = "공지사항 목록 정보가 담긴 페이지")
     })
     @GetMapping("/list")
     public String noticeList(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
@@ -59,5 +60,17 @@ public class NoticeController {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
         return "notice/notice-list";
+    }
+
+    @Operation(summary = "공지사항 상세 페이지 반환", description = "공지사항 상세 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 상세 정보가 담긴 페이지")
+    })
+    @GetMapping("/detail/{noticeId}")
+    public String noticeDetail(@PathVariable Long noticeId, Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        return "notice/notice-detail";
     }
 }

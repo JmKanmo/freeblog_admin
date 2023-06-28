@@ -9,16 +9,18 @@
 
     <!-- 공지사항 목록 템플릿 -->
     <script id="notice-list-template" type="text/x-handlebars-template">
-        {{#each noticeDto}}
-            <li class="notice_board clear_fix">
-                    <span class="notice_board_text_style notice_board_title" id="notice_board_title">
+        {{#each noticeList}}
+        <li class="notice_board clear_fix">
+            <a class="notice_link" href="/notice/detail/{{noticeId}}">
+                <span class="notice_board_text_style notice_board_title" id="notice_board_title">
                         {{title}}
                     </span>
 
                 <span class="notice_board_text_style notice_board_date" id="notice_board_date">
                     {{registerTime}}
                 </span>
-            </li>
+            </a>
+        </li>
         {{/each}}
     </script>
 </th:block>

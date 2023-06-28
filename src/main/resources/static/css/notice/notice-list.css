@@ -24,9 +24,24 @@
     margin-top: 10px;
 }
 
+.notice_list_container .notice_list .notice_board .notice_link {
+    cursor: pointer;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+}
+
 .notice_list_container .notice_list .notice_board_text_style {
-    font-size: 15px;
-    color: #666;
+    display: block;
+    overflow: hidden;
+    max-width: 70%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 0.875em;
+    line-height: 1.4;
+    color: #555;
+    margin-top: 10px;
+    text-align: center;
 }
 
 .notice_list_container .notice_list .notice_board_title {

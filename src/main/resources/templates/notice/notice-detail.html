@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>공지사항 상세 페이지</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/notice/notice-detail.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/notice/notice-detail.js}"></script>
+</head>
+
+<body>
+<div th:replace="fragments/header::header"></div>
+<div class="notice_detail_container">
+    공지사항 상세 페이지 입니다
+</div>
+<div th:replace="fragments/footer::footer"></div>
+</body>
+</html>
