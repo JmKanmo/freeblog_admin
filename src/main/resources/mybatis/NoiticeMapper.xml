@@ -16,7 +16,9 @@
                title,
                summary,
                contents
-        from notice LIMIT #{noticePagination.limitStart}
-            , #{recordSize}
+        from notice
+        order by register_time desc
+            LIMIT #{noticePagination.limitStart}
+               , #{recordSize}
     </select>
 </mapper>
