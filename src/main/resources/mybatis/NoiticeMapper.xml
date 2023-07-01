@@ -21,4 +21,16 @@
             LIMIT #{noticePagination.limitStart}
                , #{recordSize}
     </select>
+
+    <select id="findNoticeDetailDtoById" resultType="com.service.freeblog_admin.web.dto.notice.NoticeDetailDto">
+        select notice_id,
+               title,
+               contents,
+               summary,
+               upload_key,
+               date_format(register_time, '%y.%m.%d %H:%i') as register_time,
+               date_format(update_time, '%y.%m.%d %H:%i') as update_time
+        from notice
+        where notice_id = #{noticeId}
+    </select>
 </mapper>

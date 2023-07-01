@@ -1,6 +1,7 @@
 package com.service.freeblog_admin.web.service.notice;
 
 import com.service.freeblog_admin.web.domain.notice.Notice;
+import com.service.freeblog_admin.web.dto.notice.NoticeDetailDto;
 import com.service.freeblog_admin.web.dto.notice.NoticeDto;
 import com.service.freeblog_admin.web.dto.notice.NoticeSearchPagingDto;
 import com.service.freeblog_admin.web.dto.notice.NoticeTotalDto;
@@ -32,5 +33,9 @@ public class NoticeService {
         noticeSearchPagingDto.setNoticePagination(noticePagination);
         List<NoticeDto> noticeDtoList = noticeMapper.findNoticeDtoListByPaging(noticeSearchPagingDto);
         return new NoticePaginationResponse<>(NoticeTotalDto.from(noticeDtoList), noticePagination);
+    }
+
+    public NoticeDetailDto findNoticeDetailDtoById(Long noticeId) {
+        return noticeMapper.findNoticeDetailDtoById(noticeId);
     }
 }

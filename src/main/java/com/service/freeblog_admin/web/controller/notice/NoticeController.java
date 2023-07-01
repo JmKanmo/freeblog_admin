@@ -1,9 +1,11 @@
 package com.service.freeblog_admin.web.controller.notice;
 
 import com.service.freeblog_admin.util.BlogAdminUtil;
+import com.service.freeblog_admin.web.dto.notice.NoticeDetailDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
 import com.service.freeblog_admin.web.model.notice.NoticeInput;
+import com.service.freeblog_admin.web.service.notice.NoticeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -25,6 +27,8 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/notice")
 @Slf4j
 public class NoticeController {
+    private final NoticeService noticeService;
+
     @Operation(summary = "공지사항 페이지 반환", description = "공지사항 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "공지사항 정보가 담긴 페이지")
@@ -71,6 +75,8 @@ public class NoticeController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+
+        model.addAttribute("noticeDetail", noticeService.findNoticeDetailDtoById(noticeId));
         return "notice/notice-detail";
     }
 }

@@ -1,0 +1,26 @@
+.notice_detail_container {
+    margin: 0 auto;
+    width: 499px;
+    padding-bottom: 130px;
+    background-color: #ffffff;
+}
+
+.notice_detail_container .notice_detail_title_container .notice_detail_title {
+    font-weight: bold;
+    color: #555;
+}
+
+.notice_detail_container .notice_detail_title_container .notice_detail_date {
+    color: #557A74;
+    float: right;
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.notice_detail_container .notice_detail_title_container .notice_detail_contents_container {
+    padding: 20px 0px 20px 0px;
+}
+
+.notice_detail_container .notice_detail_title_container .notice_detail_contents_container .notice_detail_contents {
+    border: none;
+}
