@@ -24,3 +24,9 @@
 .notice_detail_container .notice_detail_title_container .notice_detail_contents_container .notice_detail_contents {
     border: none;
 }
+
+
+.notice_detail_container .notice_detail_title_container .notice_list_button_container {
+    text-align: center;
+}
+

@@ -3,6 +3,7 @@ class NoticeDetailController extends UtilController {
         super();
         this.noticeDetailTitle = document.getElementById("notice_detail_title");
         this.noticeDetailContents = this.getReadOnlyQuillEditor("notice_detail_contents");
+        this.noticeListButton = document.getElementById("notice_list_button");
     }
 
     initNoticeDetailController() {
@@ -21,7 +22,9 @@ class NoticeDetailController extends UtilController {
     }
 
     initEventListener() {
-        // TODO
+        this.noticeListButton.addEventListener("click", evt => {
+            location.href = `/notice/list`;
+        })
     }
 }
 
