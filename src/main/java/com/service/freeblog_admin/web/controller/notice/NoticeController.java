@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,7 @@ public class NoticeController {
 
     @Operation(summary = "공지사항 작성 페이지 반환", description = "공지사항 작성 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "공지사항 작성 페이지 밚 ㅘㄴ")
+            @ApiResponse(responseCode = "200", description = "공지사항 작성 페이지 반환")
     })
     @GetMapping("/write")
     public String noticeWrite(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
@@ -52,6 +53,19 @@ public class NoticeController {
         }
         model.addAttribute("noticeInput", NoticeInput.builder().build());
         return "notice/notice-write";
+    }
+
+    @Operation(summary = "공지사항 수정 페이지 반환", description = "공지사항 수정 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 수정 페이지 반환")
+    })
+    @GetMapping("/update")
+    public String noticeUpdate(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        model.addAttribute("noticeInput", NoticeInput.builder().build());
+        return "notice/notice-update";
     }
 
     @Operation(summary = "공지사항 목록 페이지 반환", description = "공지사항 목록 페이지를 반환하는 GET 메서드")
@@ -78,5 +92,19 @@ public class NoticeController {
 
         model.addAttribute("noticeDetail", noticeService.findNoticeDetailDtoById(noticeId));
         return "notice/notice-detail";
+    }
+
+    @Operation(summary = "공지사항 수정", description = "공지사항 수정 진행 POST 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 수정 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 공지사항 수정 작업 실패")
+    })
+    @PostMapping("/update/{noticeId}")
+    public String noticeUpdate(@PathVariable Long noticeId, Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        // TODO
+        return String.format("redirect:/notice/detail/6", noticeId);
     }
 }

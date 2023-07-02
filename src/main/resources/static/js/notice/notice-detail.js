@@ -13,7 +13,7 @@ class NoticeDetailController extends UtilController {
     }
 
     initNoticeTitle() {
-        document.title = `공지사항: ${this.noticeDetailTitle.value}`;
+        document.title = `공지사항: ${this.noticeDetailTitle.innerText}`;
     }
 
     initNoticeContent() {
