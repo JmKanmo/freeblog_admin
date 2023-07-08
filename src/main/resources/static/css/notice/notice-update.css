@@ -40,18 +40,18 @@ body {
     border-radius: 5px;
 }
 
-.notice_write_container .notice_write_form .notice_write_block .editor-board {
+.notice_update_container .notice_update_form .notice_update_block .editor-board {
     position: relative;
 }
 
-.notice_write_container .notice_write_form .notice_write_block .editor-board .notice_write_editor {
+.notice_update_container .notice_update_form .notice_update_block .editor-board .notice_update_editor {
     padding-top: 15px;
     padding-bottom: 15px;
     height: 600px;
 }
 
 
-.notice_write_container .notice_write_form .notice_write_block .view_editor_source_button {
+.notice_update_container .notice_update_form .notice_update_block .view_editor_source_button {
     position: absolute;
     right: 20px;
     bottom: 5px;

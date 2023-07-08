@@ -14,17 +14,16 @@
 <div class="notice_update_container">
     <form method="post" class="notice_update_form" id="notice_update_form" name="notice_update_form"
           enctype="multipart/form-data" th:object="${noticeInput}">
-            <!-- TODO 해당 폼 작업 진행 -->
-        <div class="notice_write_button_container clear_fix">
+        <div class="notice_update_button_container clear_fix">
             <div class="notice_update_top_container clear_fix">
-                <button type="button" class="notice_write_register_button" id="notice_write_register_button">등록</button>
+                <button type="submit" class="notice_update_register_button" id="notice_update_register_button">등록</button>
             </div>
 
             <div class="common_input_div input_block clear_fix">
                 <label for="notice_title" class="common_input_label common_blog_name_label" title="공지사항 명">
                     <span class="blind">공지사항 이름</span>
                 </label>
-                <input type="text" id="notice_title" class="notice_name_input"
+                <input type="text" id="notice_title" class="notice_name_input" th:value="${noticeUpdate.title}"
                        maxlength="128" placeholder="제목을 입력해주세요. (최대 128글자)" required>
             </div>
 
@@ -34,10 +33,10 @@
             </div>
 
 
-            <div class="notice_write_block">
+            <div class="notice_update_block">
                 <div class="editor-board">
                     <!-- Contents Here -->
-                    <div id="notice_write_editor" class="notice_write_editor">
+                    <div id="notice_update_editor" class="notice_update_editor">
                         <!-- Contents Here -->
                     </div>
                     <button id="view-editor-source" type="button"
@@ -46,14 +45,15 @@
             </div>
 
             <div class="basic_info_spel_div">
-            <span th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" id="notice_write_validation_error"
-                  class="notice_write_validation_err validation_error"></span>
+            <span th:if="${#fields.hasErrors('contents')}" th:errors="*{contents}" id="notice_update_validation_error"
+                  class="notice_update_validation_err validation_error"></span>
             </div>
 
+            <input type="hidden" id="upload_key" readonly th:value="${noticeUpdate.uploadKey}">
             <input type="hidden" id="hidden_notice_title" name="title" th:field="*{title}">
             <input type="hidden" id="hidden_notice_content" name="contents" th:field="*{contents}">
             <input type="hidden" id="hidden_notice_summary" name="summary" th:field="*{summary}">
-            <input type="hidden" id="upload_key" name="uploadKey" th:field="*{uploadKey}">
+            <input type="hidden" id="hidden_upload_key" name="uploadKey" th:field="*{uploadKey}">
         </div>
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>

@@ -29,7 +29,7 @@ public enum ServiceExceptionMessage {
     FAILED_AUTHENTICATION("인증에 실패하였습니다."),
 
     // 공지 사항 관련 에러 메시지
-
+    NOT_FOUND_NOTIFICATION("공지사항을 발견하지 못했습니다"),
     // 기타 처리 관련 메시지
     NOT_VALID_FORM_INPUT("폼 입력 정보가 양식 조건에 유효하지 않습니다."),
     NOT_VALID_FILE_NAME("올바르지 않은 파일 명입니다.");

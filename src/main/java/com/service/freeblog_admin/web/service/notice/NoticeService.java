@@ -1,10 +1,10 @@
 package com.service.freeblog_admin.web.service.notice;
 
 import com.service.freeblog_admin.web.domain.notice.Notice;
-import com.service.freeblog_admin.web.dto.notice.NoticeDetailDto;
-import com.service.freeblog_admin.web.dto.notice.NoticeDto;
-import com.service.freeblog_admin.web.dto.notice.NoticeSearchPagingDto;
-import com.service.freeblog_admin.web.dto.notice.NoticeTotalDto;
+import com.service.freeblog_admin.web.dto.notice.*;
+import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
+import com.service.freeblog_admin.web.error.model.notice.NoticeManageException;
+import com.service.freeblog_admin.web.model.notice.NoticeUpdateInput;
 import com.service.freeblog_admin.web.paging.notice.NoticePagination;
 import com.service.freeblog_admin.web.paging.notice.NoticePaginationResponse;
 import com.service.freeblog_admin.web.repository.notice.NoticeMapper;
@@ -37,5 +37,18 @@ public class NoticeService {
 
     public NoticeDetailDto findNoticeDetailDtoById(Long noticeId) {
         return noticeMapper.findNoticeDetailDtoById(noticeId);
+    }
+
+    public NoticeUpdateDto findNoticeUpdateDtoById(Long noticeId) {
+        return NoticeUpdateDto.from(noticeRepository.findById(noticeId).orElseThrow(() -> new NoticeManageException(ServiceExceptionMessage.NOT_FOUND_NOTIFICATION.message())));
+    }
+
+    @Transactional
+    public void updateNotice(Long noticeId, NoticeUpdateInput noticeUpdateInput) {
+        Notice notice = noticeRepository.findById(noticeId).orElseThrow(() -> new NoticeManageException(ServiceExceptionMessage.NOT_FOUND_NOTIFICATION.message()));
+        notice.setTitle(noticeUpdateInput.getTitle());
+        notice.setContents(noticeUpdateInput.getContents());
+        notice.setSummary(noticeUpdateInput.getSummary());
+        notice.setUploadKey(noticeUpdateInput.getUploadKey());
     }
 }

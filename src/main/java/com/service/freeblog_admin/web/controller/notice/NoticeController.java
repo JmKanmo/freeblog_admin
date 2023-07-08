@@ -1,7 +1,8 @@
 package com.service.freeblog_admin.web.controller.notice;
 
 import com.service.freeblog_admin.util.BlogAdminUtil;
-import com.service.freeblog_admin.web.dto.notice.NoticeDetailDto;
+import com.service.freeblog_admin.web.dto.notice.NoticeUpdateDto;
+import com.service.freeblog_admin.web.model.notice.NoticeUpdateInput;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
 import com.service.freeblog_admin.web.model.notice.NoticeInput;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Tag(name = "공지사항", description = "공지사항 관련 API")
 @RequiredArgsConstructor
@@ -59,11 +61,15 @@ public class NoticeController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "공지사항 수정 페이지 반환")
     })
-    @GetMapping("/update")
-    public String noticeUpdate(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+    @GetMapping("/update/{noticeId}")
+    public String noticeUpdate(@PathVariable Long noticeId, Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+
+        NoticeUpdateDto noticeUpdateDto = noticeService.findNoticeUpdateDtoById(noticeId);
+
+        model.addAttribute("noticeUpdate", noticeUpdateDto);
         model.addAttribute("noticeInput", NoticeInput.builder().build());
         return "notice/notice-update";
     }
@@ -100,11 +106,11 @@ public class NoticeController {
             @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 공지사항 수정 작업 실패")
     })
     @PostMapping("/update/{noticeId}")
-    public String noticeUpdate(@PathVariable Long noticeId, Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+    public String noticeUpdate(@PathVariable Long noticeId, @Valid NoticeUpdateInput noticeUpdateInput, Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
-        // TODO
-        return String.format("redirect:/notice/detail/6", noticeId);
+        noticeService.updateNotice(noticeId, noticeUpdateInput);
+        return String.format("redirect:/notice/detail/%d", noticeId);
     }
 }
