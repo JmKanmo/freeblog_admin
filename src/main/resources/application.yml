@@ -74,6 +74,18 @@ spring:
         order_inserts: true
         order_updates: true
 
+  redis:
+    lettuce:
+      pool:
+        max-active: 5
+        max-idle: 5
+        min-idle: 2
+        max-wait: 500
+    port: ${REDIS_PORT}
+    host: ${REDIS_HOST}
+    connect-timeout: 5000
+    timeout: 1500
+
 springdoc:
   cache:
     disabled: true

@@ -2,6 +2,7 @@ package com.service.freeblog_admin.util;
 
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.BlogAdminServiceException;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -22,6 +23,14 @@ public class BlogAdminUtil {
 //            return "/";
 //        }
         return redirectUrl;
+    }
+
+    public static String createRandomAlphaNumberString(int length) {
+        return RandomStringUtils.randomAlphanumeric(length);
+    }
+
+    public static String createRandomString(int length) {
+        return RandomStringUtils.random(length);
     }
 
     public static String redirect(String url) {
