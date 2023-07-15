@@ -4,6 +4,8 @@ class NoticeDetailController extends UtilController {
         this.noticeDetailTitle = document.getElementById("notice_detail_title");
         this.noticeDetailContents = this.getReadOnlyQuillEditor("notice_detail_contents");
         this.noticeListButton = document.getElementById("notice_list_button");
+        this.noticeDetailDeleteButton = document.getElementById("notice_detail_delete_button");
+        this.noticeDeleteForm = document.getElementById("notice_delete_form");
     }
 
     initNoticeDetailController() {
@@ -24,7 +26,13 @@ class NoticeDetailController extends UtilController {
     initEventListener() {
         this.noticeListButton.addEventListener("click", evt => {
             location.href = `/notice/list`;
-        })
+        });
+
+        this.noticeDetailDeleteButton.addEventListener("click", evt => {
+            if (confirm("공지사항 게시글을 삭제하겠습니까?")) {
+                this.noticeDeleteForm.submit();
+            }
+        });
     }
 }
 

@@ -4,6 +4,7 @@ import com.service.freeblog_admin.web.dto.notice.NoticeDetailDto;
 import com.service.freeblog_admin.web.dto.notice.NoticeDto;
 import com.service.freeblog_admin.web.dto.notice.NoticeSearchPagingDto;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -11,7 +12,9 @@ import java.util.List;
 public interface NoticeMapper {
     int findNoticeCount();
 
-    List<NoticeDto> findNoticeDtoListByPaging(NoticeSearchPagingDto noticeSearchPagingDto);
+    int findNoticeCountByKeyword(String searchType, String keyword);
+
+    List<NoticeDto> findNoticeDtoListByPaging(@Param("noticeSearchPagingDto") NoticeSearchPagingDto noticeSearchPagingDto);
 
     NoticeDetailDto findNoticeDetailDtoById(Long noticeId);
 }

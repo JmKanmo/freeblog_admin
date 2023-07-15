@@ -33,7 +33,7 @@ public class NoticeService {
     }
 
     public NoticePaginationResponse<NoticeTotalDto> findTotalPaginationNotice(NoticeSearchPagingDto noticeSearchPagingDto) {
-        int noticeCount = noticeMapper.findNoticeCount();
+        int noticeCount = noticeMapper.findNoticeCountByKeyword(noticeSearchPagingDto.getSearchType(), noticeSearchPagingDto.getKeyword());
         NoticePagination noticePagination = new NoticePagination(noticeCount, noticeSearchPagingDto);
         noticeSearchPagingDto.setNoticePagination(noticePagination);
         List<NoticeDto> noticeDtoList = noticeMapper.findNoticeDtoListByPaging(noticeSearchPagingDto);
@@ -55,5 +55,11 @@ public class NoticeService {
         notice.setContents(noticeUpdateInput.getContents());
         notice.setSummary(noticeUpdateInput.getSummary());
         notice.setUploadKey(noticeUpdateInput.getUploadKey());
+    }
+
+    @Transactional
+    public void deleteNotice(Long noticeId) {
+        Notice notice = noticeRepository.findById(noticeId).orElseThrow(() -> new NoticeManageException(ServiceExceptionMessage.NOT_FOUND_NOTIFICATION.message()));
+        noticeRepository.delete(notice);
     }
 }

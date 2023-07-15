@@ -22,4 +22,11 @@ class MapperTest {
         List<NoticeDto> noticeDtoList = noticeMapper.findNoticeDtoListByPaging(new NoticeSearchPagingDto());
         Assertions.assertNotNull(noticeDtoList);
     }
+
+    @Transactional(readOnly = true)
+    @Test
+    void searchNotice() {
+        int count = noticeMapper.findNoticeCountByKeyword(null, null);
+        System.out.println(count);
+    }
 }

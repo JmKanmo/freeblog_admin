@@ -16,10 +16,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -112,5 +109,19 @@ public class NoticeController {
         }
         noticeService.updateNotice(noticeId, noticeUpdateInput);
         return String.format("redirect:/notice/detail/%d", noticeId);
+    }
+
+    @Operation(summary = "공지사항 수정", description = "공지사항 수정 진행 POST 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "공지사항 수정 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 공지사항 수정 작업 실패")
+    })
+    @PostMapping("/delete")
+    public String noticeDelete(@RequestParam(value = "noticeId", required = false, defaultValue = "0") Long noticeId, Model model, Authentication authentication) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        noticeService.deleteNotice(noticeId);
+        return "redirect:/notice/list";
     }
 }
