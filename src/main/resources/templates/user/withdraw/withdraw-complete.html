@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원 탈퇴 완료</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+
+    <style>
+        .withdraw_complete_container {
+            max-width: 500px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .withdraw_complete_container .withdraw_complete_title {
+            color: #6c757d;
+            font-size: 20px;
+        }
+
+        .signup_text {
+            font-size: 15px;
+            color: darkgreen;
+            text-decoration: underline;
+            padding: 12px 0 12px 0;
+        }
+
+        .error_text {
+            font-weight: bold;
+            color: darkgreen;
+            padding: 12px 0px 12px 0;
+        }
+    </style>
+</head>
+
+<body>
+<div class="withdraw_complete_container">
+    <th:block th:if="${result != null} and ${#strings.isEmpty(result)} eq false">
+        <h1 class="withdraw_complete_title" th:text="${result}">작업이 완료되었습니다.</h1>
+    </th:block>
+
+    <th:block th:if="${error == null} or ${#strings.isEmpty(error)} eq true">
+        <p class="signup_text">회원탈퇴 후, 재가입을 원하시면 회원가입을 해주세요.</p>
+    </th:block>
+
+    <th:block th:if="${error != null} and ${#strings.isEmpty(error)} eq false">
+        <p class="error_text" th:text="${error}"></p>
+    </th:block>
+
+    <a class="common_dark_cyan_text" href="/">홈으로 가기 </a>
+</div>
+</body>
+</html>
