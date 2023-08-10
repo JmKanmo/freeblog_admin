@@ -1,0 +1,34 @@
+.music_container {
+    margin: 0 auto;
+    width: 988px;
+    padding-bottom: 220px;
+    padding-top: 5px;
+}
+
+.music_container .music_container_div {
+    border: 1px solid #e3e3e3;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.music_container .music_container_div .music_title_container {
+    text-align: center;
+    -webkit-box-shadow: 0 3px 3px 0 rgb(0 0 0 / 10%);
+    padding-bottom: 15px;
+}
+
+.music_container .music_container_div .music_title_container .music_title_text {
+    display: inline-block;
+    background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
+    -webkit-background-clip: text !important;
+    color: transparent;
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.music_container .music_page_title {
+    font-size: 23px;
+    color: #666666;
+    text-align: center;
+    padding-bottom: 40px;
+}

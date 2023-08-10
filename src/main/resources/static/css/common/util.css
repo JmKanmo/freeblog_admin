@@ -558,7 +558,7 @@ input:focus {
 }
 
 /* blog title style */
-.blog-admin-title-style {
+.common-admin-title-style {
     display: inline-block;
     background: linear-gradient(40deg, #2096ff, #05ffa3) !important;
     font-size: 25px;
@@ -568,7 +568,7 @@ input:focus {
     font-weight: bold;
 }
 
-.blog-admin-title-style:hover {
+.common-admin-title-style:hover {
     display: inline-block;
     background: linear-gradient(40deg, #ffd86f, #fc6262) !important;
     -webkit-background-clip: text !important;
