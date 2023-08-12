@@ -17,7 +17,33 @@
             <h3 class="common-admin-title-style">음악 관리</h3>
         </div>
 
-        <!-- TODO -->
+        <div class="music_player_container">
+            <div class="audioPlayerBlock">
+                <div class="music_category_select_container">
+                    <select>
+                        <option value="1">Americano</option>
+                        <option value="2">Latte</option>
+                        <option value="3">Green Tea</option>
+                    </select>
+                </div>
+
+                <div class="music_setting_container">
+                    <button class="music_setting_button common_blue_button">
+                        추가
+                    </button>
+
+                    <button class="music_setting_button common_orange_button">
+                        수정
+                    </button>
+
+                    <button class="music_setting_button common_red_button">
+                        삭제
+                    </button>
+                </div>
+
+                <div class="audio_player_style" id="audio_player"></div>
+            </div>
+        </div>
     </div>
 </div>
 <div th:replace="fragments/footer::footer"></div>
