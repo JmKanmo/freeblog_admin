@@ -46,11 +46,20 @@
 .music_container .music_player_container .audioPlayerBlock .music_setting_container {
     position: absolute;
     right: 10px;
-    top: 0;
+    top: -10px;
+}
+
+.music_container .music_player_container .audioPlayerBlock .music_setting_container .music_update_container {
+    padding-bottom: 10px;
+    text-align: right;
+}
+
+.music_container .music_player_container .audioPlayerBlock .music_setting_container .music_category_update_container {
+
 }
 
 .music_container .music_player_container .audio_player_style {
-    margin-top: 15px;
+    margin-top: 30px;
 }
 
 /* select box style */

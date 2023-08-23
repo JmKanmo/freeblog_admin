@@ -22,12 +22,12 @@ import javax.servlet.http.HttpServletRequest;
 public class AdminController {
 
 
-    @Operation(summary = "블로그 페이지 반환", description = "블로그 페이지를 반환하는 GET 메서드")
+    @Operation(summary = "어드민 페이지 반환", description = "어드민 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "블로그,사용자 정보가 담긴 블로그 페이지")
+            @ApiResponse(responseCode = "200", description = "어드민 정보가 담긴 페이지")
     })
     @GetMapping
-    public String blog(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+    public String admin(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
         return "admin";
     }
 }
