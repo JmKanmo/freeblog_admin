@@ -1,6 +1,7 @@
 package com.service.freeblog_admin.web.domain.music;
 
 import com.service.freeblog_admin.web.domain.tag.Tag;
+import com.service.freeblog_admin.web.model.music.MusicCategoryInput;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,4 +29,10 @@ public class MusicCategory {
     @Fetch(FetchMode.SUBSELECT)
     @OneToMany(mappedBy = "musicCategory")
     private List<Music> musicList;
+
+    public static MusicCategory from(MusicCategoryInput musicCategoryInput) {
+        return MusicCategory.builder()
+                .name(musicCategoryInput.getName())
+                .build();
+    }
 }
