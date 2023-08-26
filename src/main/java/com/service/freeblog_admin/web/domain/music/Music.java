@@ -1,5 +1,6 @@
 package com.service.freeblog_admin.web.domain.music;
 
+import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "music")
-public class Music {
+public class Music extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "music_id")

@@ -1,0 +1,18 @@
+.music_category_update_title {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.music_category_update_container {
+    padding: 20px 20px 30px 20px;
+    margin-top: 30px;
+    border: 1px solid #eeeeee;
+}
+
+.music_category_update_container .music_category_select {
+    margin-left: 10px;
+}
+
+.music_category_update_container .update_category_input {
+    margin-left: 10px;
+}

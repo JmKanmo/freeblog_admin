@@ -46,4 +46,16 @@ public class MusicController {
         }
         return "music/music-add";
     }
+
+    @Operation(summary = "음악 설정 페이지 반환", description = "음악 설정 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 설정 정보가 담긴 관리 페이지")
+    })
+    @GetMapping("/update")
+    public String musicUpdate(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        return "music/music-update";
+    }
 }

@@ -42,6 +42,19 @@ public class MusicCategoryController {
         return "music/music-category-add";
     }
 
+    @Operation(summary = "음악 카테고리 추가 페이지 반환", description = "음악 카테고리 추가 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 카테고리 추가 정보가 담긴 관리 페이지")
+    })
+    @GetMapping("/update")
+    public String musicCategoryUpdate(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        model.addAttribute("music_category_list", musicCategoryService.findMusicCategoryDtoList());
+        return "music/music-category-update";
+    }
+
     @Operation(summary = "음악 카테고리 추가 작업", description = "음악 카테고리 추가 작업 진행")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "음악 카테고리 추가 작업 성공"),

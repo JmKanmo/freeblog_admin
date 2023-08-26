@@ -1,5 +1,6 @@
 package com.service.freeblog_admin.web.domain.music;
 
+import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.domain.tag.Tag;
 import com.service.freeblog_admin.web.model.music.MusicCategoryInput;
 import lombok.AllArgsConstructor;
@@ -18,7 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "music_category")
-public class MusicCategory {
+public class MusicCategory extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "music_category_id")
