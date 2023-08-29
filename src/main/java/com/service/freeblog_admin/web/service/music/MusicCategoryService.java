@@ -2,6 +2,9 @@ package com.service.freeblog_admin.web.service.music;
 
 import com.service.freeblog_admin.web.domain.music.MusicCategory;
 import com.service.freeblog_admin.web.dto.music.MusicCategoryDto;
+import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
+import com.service.freeblog_admin.web.error.model.music.MusicManageException;
+import com.service.freeblog_admin.web.model.music.MusicCategoryUpdateInput;
 import com.service.freeblog_admin.web.repository.music.MusicCategoryRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -44,5 +47,11 @@ public class MusicCategoryService {
             return null;
         }
         return MusicCategoryDto.from(musicCategory.get());
+    }
+
+    @Transactional
+    public void updateMusicCategory(MusicCategoryUpdateInput musicCategoryUpdateInput) {
+        MusicCategory musicCategory = musicCategoryRepository.findById(musicCategoryUpdateInput.getUpdateId()).orElseThrow(() -> new MusicManageException(ServiceExceptionMessage.NOT_FOUND_MUSIC_CATEGORY.message()));
+        musicCategory.setName(musicCategoryUpdateInput.getUpdateName());
     }
 }

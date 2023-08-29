@@ -12,8 +12,8 @@ import javax.validation.constraints.Size;
 public class MusicCategoryUpdateInput {
     private final Long updateId;
 
-    @NotEmpty(message = "카테고리명이 비어있습니다.")
-    @NotBlank(message = "카테고리명은 공백만 올 수 없습니다.")
-    @Size(max = 50, message = "카테고리명은 최대 50글자 까지 작성 가능합니다.")
+    @NotEmpty(message = "뮤직 카테고리 이름이 비어있습니다.")
+    @NotBlank(message = "뮤직 카테고리 이름은 공백만 올 수 없습니다.")
+    @Size(max = 50, message = "뮤직 카테고리 이름은 최대 50글자 까지 작성 가능합니다.")
     private final String updateName;
 }

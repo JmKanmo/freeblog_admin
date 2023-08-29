@@ -5,6 +5,7 @@ import com.service.freeblog_admin.web.domain.music.MusicCategory;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
 import com.service.freeblog_admin.web.model.music.MusicCategoryInput;
+import com.service.freeblog_admin.web.model.music.MusicCategoryUpdateInput;
 import com.service.freeblog_admin.web.service.music.MusicCategoryService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -74,5 +76,24 @@ public class MusicCategoryController {
         musicCategoryService.musicCategoryAdd(musicCategory);
 
         return "redirect:/music-category/add";
+    }
+
+    @Operation(summary = "음악 카테고리 수정 작업", description = "음악 카테고리 수정 작업 진행")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 카테고리 수정 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 음악 카테고리 수정 작업 실패")
+    })
+    @PatchMapping("/update")
+    public String musicCategoryUpdate(@Valid MusicCategoryUpdateInput musicCategoryUpdateInput, BindingResult bindingResult, Model model, Authentication authentication) {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "music/music-category-update";
+        }
+
+        musicCategoryService.updateMusicCategory(musicCategoryUpdateInput);
+        return "redirect:/music-category/update";
     }
 }
