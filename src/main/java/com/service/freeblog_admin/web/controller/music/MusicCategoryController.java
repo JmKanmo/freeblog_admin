@@ -124,7 +124,7 @@ public class MusicCategoryController {
             return "music/music-category-delete";
         }
 
-        // TODO
+        musicCategoryService.deleteMusicCategory(musicCategoryDeleteInput);
         return "redirect:/music-category/delete";
     }
 }

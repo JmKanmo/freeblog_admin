@@ -4,7 +4,11 @@ class MusicAddController extends UtilController {
     }
 
     initMusicAddController() {
-        // TODO
+        this.initEventListener();
+    }
+
+    initEventListener() {
+
     }
 }
 

@@ -9,8 +9,94 @@
 </head>
 
 <body>
-<div class="music_add_container">
-    <!-- TODO 뮤직 등록 폼 작성 -->
+<h3 class="music_add_title common_dark_green_text">
+    뮤직 정보 입력
+</h3>
+
+<div class="music_add_container common_form_container">
+    <form method="post" class="music_add_form" id="musicAddForm" action="/music/add"
+          th:object="${musicAddInput}">
+        <div class="common_input_div input_block clear_fix">
+            <label for="music_name" class="common_input_label common_category_label" title="음악명">
+                <span class="blind">음악명</span>
+            </label>
+
+            <input type="text" th:field="*{name}" class="music_name_input" id="music_name" name="name"
+                   maxlength="50"
+                   placeholder="음악명 입력 (최대 50글자 이내)">
+        </div>
+
+        <div class="basic_info_spel_div">
+            <span id="music_name_validation_error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                  class="validation_error"></span>
+        </div>
+
+        <div class="common_input_div input_block clear_fix">
+            <label for="music_artist" class="common_input_label common_category_label" title="아티스트">
+                <span class="blind">아티스트명</span>
+            </label>
+
+            <input type="text" th:field="*{artist}" class="music_artist_input" id="music_artist" name="artist"
+                   maxlength="50"
+                   placeholder="아티스트명 입력 (최대 50글자 이내)">
+        </div>
+
+        <div class="basic_info_spel_div">
+            <span id="music_artist_validation_error" th:if="${#fields.hasErrors('artist')}" th:errors="*{artist}"
+                  class="validation_error"></span>
+        </div>
+
+        <div class="common_input_div input_block clear_fix">
+            <label for="music_url" class="common_input_label common_category_label" title="URL">
+                <span class="blind">URL</span>
+            </label>
+
+            <input type="text" th:field="*{url}" class="music_url_input" id="music_url" name="url"
+                   maxlength="300"
+                   placeholder="url 입력 (최대 300글자 이내)">
+        </div>
+
+        <div class="basic_info_spel_div">
+            <span id="music_url_validation_error" th:if="${#fields.hasErrors('url')}" th:errors="*{url}"
+                  class="validation_error"></span>
+        </div>
+
+        <div class="common_input_div input_block clear_fix">
+            <label for="music_cover" class="common_input_label common_category_label" title="cover">
+                <span class="blind">cover</span>
+            </label>
+
+            <input type="text" th:field="*{cover}" class="music_cover_input" id="music_cover" name="cover"
+                   maxlength="300"
+                   placeholder="cover 입력 (최대 300글자 이내)">
+        </div>
+
+        <div class="basic_info_spel_div">
+            <span id="music_cover_validation_error" th:if="${#fields.hasErrors('cover')}" th:errors="*{cover}"
+                  class="validation_error"></span>
+        </div>
+
+        <div class="common_input_div input_block clear_fix">
+            <label for="music_lrc" class="common_input_label common_category_label" title="LRC">
+                <span class="blind">LRC</span>
+            </label>
+
+            <input type="text" th:field="*{lrc}" class="music_lrc_input" id="music_lrc" name="lrc"
+                   maxlength="10000"
+                   placeholder="LRC 입력 (최대 10000글자 이내)">
+        </div>
+
+        <div class="basic_info_spel_div">
+            <span id="music_lic_validation_error" th:if="${#fields.hasErrors('lrc')}" th:errors="*{lrc}"
+                  class="validation_error"></span>
+        </div>
+
+        <button type="button" class="common_submit_button" id="musicAddButton">
+            등록
+        </button>
+
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+    </form>
 </div>
 </body>
 </html>

@@ -3,6 +3,7 @@ package com.service.freeblog_admin.web.controller.music;
 import com.service.freeblog_admin.util.BlogAdminUtil;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
+import com.service.freeblog_admin.web.model.music.MusicAddInput;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -44,6 +45,7 @@ public class MusicController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+        model.addAttribute("musicAddInput", MusicAddInput.builder().build());
         return "music/music-add";
     }
 
