@@ -4,6 +4,7 @@ import com.service.freeblog_admin.web.domain.music.MusicCategory;
 import com.service.freeblog_admin.web.dto.music.MusicCategoryDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.music.MusicManageException;
+import com.service.freeblog_admin.web.model.music.MusicCategoryDeleteInput;
 import com.service.freeblog_admin.web.model.music.MusicCategoryUpdateInput;
 import com.service.freeblog_admin.web.repository.music.MusicCategoryRepository;
 import lombok.RequiredArgsConstructor;
@@ -53,5 +54,11 @@ public class MusicCategoryService {
     public void updateMusicCategory(MusicCategoryUpdateInput musicCategoryUpdateInput) {
         MusicCategory musicCategory = musicCategoryRepository.findById(musicCategoryUpdateInput.getUpdateId()).orElseThrow(() -> new MusicManageException(ServiceExceptionMessage.NOT_FOUND_MUSIC_CATEGORY.message()));
         musicCategory.setName(musicCategoryUpdateInput.getUpdateName());
+    }
+
+    @Transactional
+    public void deleteMusicCategory(MusicCategoryDeleteInput musicCategoryDeleteInput) {
+        MusicCategory musicCategory = musicCategoryRepository.findById(musicCategoryDeleteInput.getDeleteId()).orElseThrow(() -> new MusicManageException(ServiceExceptionMessage.NOT_FOUND_MUSIC_CATEGORY.message()));
+        musicCategoryRepository.delete(musicCategory);
     }
 }
