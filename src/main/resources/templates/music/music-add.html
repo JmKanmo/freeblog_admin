@@ -16,6 +16,19 @@
 <div class="music_add_container common_form_container">
     <form method="post" class="music_add_form" id="musicAddForm" action="/music/add"
           th:object="${musicAddInput}">
+
+        <div class="common_input_div input_block clear_fix">
+            <label for="musicCategoryList" class="common_input_label common_category_label" title="제목">
+                <span class="blind">카테고리</span>
+            </label>
+
+            <select class="music_category_select" id="musicCategoryList">
+                <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
+                        th:text="${musicCategory.name}">
+                </option>
+            </select>
+        </div>
+
         <div class="common_input_div input_block clear_fix">
             <label for="music_name" class="common_input_label common_category_label" title="음악명">
                 <span class="blind">음악명</span>
@@ -95,8 +108,13 @@
             등록
         </button>
 
+        <input type="hidden" id="musicCategoryIdHiddenInput" name="categoryId">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>
 </div>
+<script th:inline="javascript">
+    const selectMusicCategoryId = document.getElementById("musicCategoryList").value;
+    document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
+</script>
 </body>
 </html>

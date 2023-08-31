@@ -51,6 +51,7 @@ public class MusicCategoryController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+        model.addAttribute("musicCategoryUpdateInput", MusicCategoryUpdateInput.builder().build());
         model.addAttribute("music_category_list", musicCategoryService.findMusicCategoryDtoList());
         return "music/music-category-update";
     }
@@ -101,6 +102,7 @@ public class MusicCategoryController {
         }
 
         if (bindingResult.hasErrors()) {
+            model.addAttribute("music_category_list", musicCategoryService.findMusicCategoryDtoList());
             return "music/music-category-update";
         }
 

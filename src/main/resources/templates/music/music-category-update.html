@@ -16,32 +16,39 @@
 </h3>
 
 <div class="music_category_update_container common_form_container">
-    <div class="common_input_div input_block clear_fix">
-        <label for="musicCategoryList" class="common_input_label common_category_label" title="제목">
-            <span class="blind">카테고리</span>
-        </label>
+    <form method="post" id="musicCategoryUpdateForm" action="/music-category/update"
+          th:object="${musicCategoryUpdateInput}">
+        <div class="common_input_div input_block clear_fix">
+            <label for="musicCategoryList" class="common_input_label common_category_label" title="제목">
+                <span class="blind">카테고리</span>
+            </label>
 
-        <select class="music_category_select" id="musicCategoryList">
-            <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
-                    th:text="${musicCategory.name}">
-            </option>
-        </select>
-    </div>
+            <select class="music_category_select" id="musicCategoryList">
+                <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
+                        th:text="${musicCategory.name}">
+                </option>
+            </select>
+        </div>
 
-    <div class="common_input_div input_block clear_fix">
-        <label for="updateCategoryName" class="common_input_label common_category_label" title="제목">
-            <span class="blind">수정 항목</span>
-        </label>
+        <div class="common_input_div input_block clear_fix">
+            <label for="updateCategoryName" class="common_input_label common_category_label" title="제목">
+                <span class="blind">수정 항목</span>
+            </label>
 
-        <input type="text" maxlength="50" id="updateCategoryName" class="update_category_input" placeholder="수정할 카테고리명을 50자
+            <input type="text" maxlength="50" id="updateCategoryName"
+                   class="update_category_input" placeholder="수정할 카테고리명을 50자
                이내로 입력해주세요.">
-    </div>
+        </div>
 
-    <button type="button" class="common_submit_button" id="musicCategoryUpdateButton">
-        수정
-    </button>
+        <div class="basic_info_spel_div">
+            <span id="user_post_name_validation_error" th:if="${#fields.hasErrors('updateName')}"
+                  th:errors="*{updateName}"
+                  class="validation_error"></span>
+        </div>
 
-    <form method="post" id="musicCategoryUpdateForm" action="/music-category/update">
+        <button type="button" class="common_submit_button" id="musicCategoryUpdateButton">
+            수정
+        </button>
         <input type="hidden" id="music_category_hidden_select_id" name="updateId">
         <input type="hidden" id="music_category_hidden_select_name" name="updateName">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>

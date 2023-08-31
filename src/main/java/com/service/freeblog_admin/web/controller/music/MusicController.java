@@ -4,6 +4,8 @@ import com.service.freeblog_admin.util.BlogAdminUtil;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
 import com.service.freeblog_admin.web.model.music.MusicAddInput;
+import com.service.freeblog_admin.web.service.music.MusicCategoryService;
+import com.service.freeblog_admin.web.service.music.MusicService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -13,10 +15,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 @Tag(name = "음악", description = "음악 관련 API")
 @RequiredArgsConstructor
@@ -24,6 +29,9 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/music")
 @Slf4j
 public class MusicController {
+    private final MusicService musicService;
+    private final MusicCategoryService musicCategoryService;
+
     @Operation(summary = "음악관리 페이지 반환", description = "음악관리 페이지를 반환하는 GET 메서드")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "음악관리 정보가 담긴 관리 페이지")
@@ -45,6 +53,7 @@ public class MusicController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+        model.addAttribute("music_category_list", musicCategoryService.findMusicCategoryDtoList());
         model.addAttribute("musicAddInput", MusicAddInput.builder().build());
         return "music/music-add";
     }
@@ -59,5 +68,24 @@ public class MusicController {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
         return "music/music-update";
+    }
+
+    @Operation(summary = "음악 추가 작업", description = "음악 추가 작업 진행")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 추가 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 음악 추가 작업 실패")
+    })
+    @PostMapping("/add")
+    public String musicAdd(@Valid MusicAddInput musicAddInput, BindingResult bindingResult, Model model, Authentication authentication) {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "music/music-add";
+        }
+
+        musicService.musicAdd(musicAddInput);
+        return "redirect:/music/add";
     }
 }

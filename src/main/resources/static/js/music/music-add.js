@@ -1,6 +1,8 @@
 class MusicAddController extends UtilController {
     constructor() {
         super();
+        this.musicAddForm = document.getElementById("musicAddForm");
+        this.musicAddButton = document.getElementById("musicAddButton");
     }
 
     initMusicAddController() {
@@ -8,7 +10,12 @@ class MusicAddController extends UtilController {
     }
 
     initEventListener() {
+        this.musicAddButton.addEventListener("click", evt => {
+            if (confirm("뮤직 정보를 추가 하겠습니까?")) {
 
+                this.musicAddForm.submit();
+            }
+        });
     }
 }
 

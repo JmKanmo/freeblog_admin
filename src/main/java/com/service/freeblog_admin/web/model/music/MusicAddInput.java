@@ -11,4 +11,5 @@ public class MusicAddInput {
     private final String url;
     private final String cover;
     private final String lrc;
+    private final Long categoryId;
 }

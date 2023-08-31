@@ -41,13 +41,12 @@ public class MusicCategoryService {
         return musicCategoryDtos;
     }
 
-    public MusicCategoryDto findMusicCategoryDtoById(long musicCategoryId) {
-        Optional<MusicCategory> musicCategory = musicCategoryRepository.findById(musicCategoryId);
+    public MusicCategory findMusicCategoryById(Long musicCategoryId) {
+        return musicCategoryRepository.findById(musicCategoryId).orElseThrow(() -> new MusicManageException(ServiceExceptionMessage.NOT_FOUND_MUSIC_CATEGORY.message()));
+    }
 
-        if (musicCategory.isEmpty()) {
-            return null;
-        }
-        return MusicCategoryDto.from(musicCategory.get());
+    public MusicCategoryDto findMusicCategoryDtoById(long musicCategoryId) {
+        return MusicCategoryDto.from(musicCategoryRepository.findById(musicCategoryId).orElseThrow(() -> new MusicManageException(ServiceExceptionMessage.NOT_FOUND_MUSIC_CATEGORY.message())));
     }
 
     @Transactional
