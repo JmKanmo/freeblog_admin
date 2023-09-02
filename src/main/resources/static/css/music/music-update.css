@@ -1,0 +1,59 @@
+.music_update_title {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.music_update_container {
+    padding: 20px 20px 30px 20px;
+    margin-top: 30px;
+    border: 1px solid #eeeeee;
+}
+
+.music_update_container .music_name_input {
+    margin-left: 10px;
+    width: 350px;
+    height: 30px;
+}
+
+.music_update_container .music_artist_input {
+    margin-left: 10px;
+    width: 350px;
+    height: 30px;
+}
+
+.music_update_container .music_url_input {
+    margin-left: 10px;
+    width: 350px;
+    height: 30px;
+}
+
+
+.music_update_container .music_cover_input {
+    margin-left: 10px;
+    width: 500px;
+    height: 30px;
+}
+
+.music_update_container .music_lrc_input {
+    margin-left: 10px;
+    width: 500px;
+    height: 30px;
+}
+
+.music_category_select {
+    margin-left: 10px;
+}
+
+.music_select {
+    margin-left: 10px;
+}
+
+.music_update_container .music_list_container {
+    padding-bottom: 20px;
+}
+
+.music_update_container .music_update_form_container {
+    border: 1px solid #ade2ba;
+    margin-top: 10px;
+    padding: 10px;
+}

@@ -1,10 +1,169 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>뮤직 수정</title>
+    <title>뮤직 수정 페이지</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/music/music-update.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/music/music-update.js}"></script>
 </head>
-<body>
 
+<body>
+<h3 class="music_update_title common_dark_green_text">
+    뮤직 정보 수정
+</h3>
+
+<div class="music_update_container common_form_container">
+    <div class="common_input_div input_block clear_fix">
+        <label for="musicCategoryListSelect" class="common_input_label common_category_label" title="제목">
+            <span class="blind">카테고리</span>
+        </label>
+
+        <span class="common_dark_cyan_text">
+                뮤직 카테고리
+            </span>
+
+        <select class="music_category_select" id="musicCategoryListSelect">
+            <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
+                    th:text="${musicCategory.name}">
+            </option>
+        </select>
+    </div>
+
+    <div class="common_input_div input_block clear_fix music_list_container">
+        <label for="musicListSelect" class="common_input_label common_category_label" title="제목">
+            <span class="blind">뮤직</span>
+        </label>
+
+        <span class="common_dark_cyan_text">
+                뮤직 목록
+            </span>
+
+        <select class="music_select" id="musicListSelect">
+            <option th:each="music : ${music_list}" th:value="${music.id}"
+                    th:text="${music.name}">
+            </option>
+        </select>
+    </div>
+
+    <span class="common_plain_text" style="">뮤직 상세 정보</span>
+
+    <div class="music_update_form_container">
+        <form method="post" class="music_update_form" id="musicUpdateForm" action="/music/update"
+              th:object="${musicUpdateInput}">
+            <div class="common_input_div input_block clear_fix">
+                <label for="updateNameInput" class="common_input_label common_category_label" title="음악명">
+                    <span class="blind">음악명</span>
+                </label>
+
+                <input type="text" th:field="*{updateName}" class="music_name_input" id="updateNameInput"
+                       name="updateName"
+                       maxlength="50"
+                       placeholder="음악명 입력 (최대 50글자 이내)">
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span id="music_name_validation_error" th:if="${#fields.hasErrors('updateName')}" th:errors="*{updateName}"
+                  class="validation_error"></span>
+            </div>
+
+            <div class="common_input_div input_block clear_fix">
+                <label for="updateArtistInput" class="common_input_label common_category_label" title="아티스트">
+                    <span class="blind">아티스트명</span>
+                </label>
+
+                <input type="text" th:field="*{updateArtist}" class="music_artist_input" id="updateArtistInput"
+                       name="updateArtist"
+                       maxlength="50"
+                       placeholder="아티스트명 입력 (최대 50글자 이내)">
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span id="music_artist_validation_error" th:if="${#fields.hasErrors('updateArtist')}"
+                  th:errors="*{updateArtist}"
+                  class="validation_error"></span>
+            </div>
+
+            <div class="common_input_div input_block clear_fix">
+                <label for="updateUrlInput" class="common_input_label common_category_label" title="URL">
+                    <span class="blind">URL</span>
+                </label>
+
+                <input type="text" th:field="*{updateUrl}" class="music_url_input" id="updateUrlInput" name="updateUrl"
+                       maxlength="300"
+                       placeholder="url 입력 (최대 300글자 이내)">
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span id="music_url_validation_error" th:if="${#fields.hasErrors('updateUrl')}" th:errors="*{updateUrl}"
+                  class="validation_error"></span>
+            </div>
+
+            <div class="common_input_div input_block clear_fix">
+                <label for="updateCoverInput" class="common_input_label common_category_label" title="cover">
+                    <span class="blind">cover</span>
+                </label>
+
+                <input type="text" th:field="*{updateCover}" class="music_cover_input" id="updateCoverInput"
+                       name="updateCover"
+                       maxlength="300"
+                       placeholder="cover 입력 (최대 300글자 이내)">
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span id="music_cover_validation_error" th:if="${#fields.hasErrors('updateCover')}"
+                  th:errors="*{updateCover}"
+                  class="validation_error"></span>
+            </div>
+
+            <div class="common_input_div input_block clear_fix">
+                <label for="updateLrcInput" class="common_input_label common_category_label" title="LRC">
+                    <span class="blind">LRC</span>
+                </label>
+
+                <input type="text" th:field="*{updateLrc}" class="music_lrc_input" id="updateLrcInput" name="lrc"
+                       maxlength="10000"
+                       placeholder="LRC 입력 (최대 10000글자 이내)">
+            </div>
+
+            <div class="basic_info_spel_div">
+            <span id="music_lic_validation_error" th:if="${#fields.hasErrors('updateLrc')}" th:errors="*{updateLrc}"
+                  class="validation_error"></span>
+            </div>
+
+
+            <div class="common_input_div input_block clear_fix music_list_container">
+                <label for="updateMusicCategoryListSelect" class="common_input_label common_category_label" title="제목">
+                    <span class="blind">뮤직</span>
+                </label>
+
+                <select class="music_select" id="updateMusicCategoryListSelect">
+                    <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
+                            th:text="${musicCategory.name}">
+                    </option>
+                </select>
+            </div>
+
+            <button type="button" class="common_submit_button" id="musicUpdateButton">
+                수정
+            </button>
+
+            <input type="hidden" id="updateIdInput" name="updateId">
+            <input type="hidden" id="updateCategoryIdInput" name="updateCategoryId">
+            <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+            <input type="hidden" name="_method" value="PATCH"/>
+        </form>
+    </div>
+</div>
+<script th:inline="javascript">
+    const musicUpdateInput = [[${musicUpdateInput}]];
+    const selectMusicCategoryId = document.getElementById("musicCategoryListSelect").value;
+    const selectMusicId = document.getElementById("musicListSelect").value;
+    document.getElementById("updateCategoryIdInput").value = selectMusicCategoryId;
+    document.getElementById("updateMusicCategoryListSelect").value = selectMusicCategoryId;
+    document.getElementById("updateIdInput").value = selectMusicId;
+    let updateCategoryOption = document.getElementById("updateMusicCategoryListSelect").options[musicUpdateInput["updateCategoryId"]];
+    updateCategoryOption.select = true;
+</script>
 </body>
 </html>

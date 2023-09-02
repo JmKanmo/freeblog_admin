@@ -1,7 +1,9 @@
 package com.service.freeblog_admin.web.service.music;
 
+import com.service.freeblog_admin.web.domain.music.Music;
 import com.service.freeblog_admin.web.domain.music.MusicCategory;
 import com.service.freeblog_admin.web.dto.music.MusicCategoryDto;
+import com.service.freeblog_admin.web.dto.music.MusicDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.music.MusicManageException;
 import com.service.freeblog_admin.web.model.music.MusicCategoryDeleteInput;
@@ -15,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional(readOnly = true)
@@ -25,6 +28,12 @@ public class MusicCategoryService {
     @Transactional
     public void musicCategoryAdd(MusicCategory musicCategory) {
         musicCategoryRepository.save(musicCategory);
+    }
+
+    public List<MusicDto> findMusicDtoByCategoryId(Long musicCategoryId) {
+        MusicCategory musicCategory = findMusicCategoryById(musicCategoryId);
+        List<Music> musicList = musicCategory.getMusicList();
+        return musicList.stream().map(MusicDto::from).collect(Collectors.toList());
     }
 
     public List<MusicCategoryDto> findMusicCategoryDtoList() {

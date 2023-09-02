@@ -1,9 +1,12 @@
 package com.service.freeblog_admin.web.controller.music;
 
 import com.service.freeblog_admin.util.BlogAdminUtil;
+import com.service.freeblog_admin.web.dto.music.MusicCategoryDto;
+import com.service.freeblog_admin.web.dto.music.MusicDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
 import com.service.freeblog_admin.web.model.music.MusicAddInput;
+import com.service.freeblog_admin.web.model.music.MusicUpdateInput;
 import com.service.freeblog_admin.web.service.music.MusicCategoryService;
 import com.service.freeblog_admin.web.service.music.MusicService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,11 +20,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.Collections;
+import java.util.List;
 
 @Tag(name = "음악", description = "음악 관련 API")
 @RequiredArgsConstructor
@@ -67,6 +73,14 @@ public class MusicController {
         if (!BlogAdminUtil.isAuth(authentication)) {
             throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
         }
+
+        List<MusicCategoryDto> musicCategoryDtoList = musicCategoryService.findMusicCategoryDtoList();
+        List<MusicDto> musicDtoList = musicCategoryDtoList.isEmpty() ? Collections.emptyList() : musicCategoryService.findMusicDtoByCategoryId(musicCategoryDtoList.get(0).getId());
+        MusicDto musicDto = musicService.findMusicDtoById(musicDtoList.get(0).getId());
+
+        model.addAttribute("music_category_list", musicCategoryDtoList);
+        model.addAttribute("music_list", musicDtoList);
+        model.addAttribute("musicUpdateInput", MusicUpdateInput.from(musicDto));
         return "music/music-update";
     }
 
@@ -87,5 +101,24 @@ public class MusicController {
 
         musicService.musicAdd(musicAddInput);
         return "redirect:/music/add";
+    }
+
+    @Operation(summary = "음악 수정 작업", description = "음악 수정 작업 진행")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 수정 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 음악 수정 작업 실패")
+    })
+    @PatchMapping("/update")
+    public String musicUpdate(@Valid MusicUpdateInput musicUpdateInput, BindingResult bindingResult, Model model, Authentication authentication) {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "music/music-update";
+        }
+
+        musicService.musicUpdate(musicUpdateInput);
+        return "redirect:/music/update";
     }
 }

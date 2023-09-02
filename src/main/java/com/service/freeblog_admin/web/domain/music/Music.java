@@ -2,6 +2,7 @@ package com.service.freeblog_admin.web.domain.music;
 
 import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.model.music.MusicAddInput;
+import com.service.freeblog_admin.web.model.music.MusicUpdateInput;
 import lombok.*;
 
 import javax.persistence.*;
@@ -41,5 +42,14 @@ public class Music extends BaseTimeEntity {
                 .lrc(musicAddInput.getLrc())
                 .musicCategory(musicCategory)
                 .build();
+    }
+
+    public void update(MusicUpdateInput musicUpdateInput, MusicCategory musicCategory) {
+        this.name = musicUpdateInput.getUpdateName();
+        this.artist = musicUpdateInput.getUpdateArtist();
+        this.url = musicUpdateInput.getUpdateUrl();
+        this.cover = musicUpdateInput.getUpdateCover();
+        this.lrc = musicUpdateInput.getUpdateUrl();
+        this.musicCategory = musicCategory;
     }
 }
