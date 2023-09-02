@@ -131,7 +131,6 @@
                   class="validation_error"></span>
             </div>
 
-
             <div class="common_input_div input_block clear_fix music_list_container">
                 <label for="updateMusicCategoryListSelect" class="common_input_label common_category_label" title="제목">
                     <span class="blind">뮤직</span>
@@ -144,15 +143,24 @@
                 </select>
             </div>
 
-            <button type="button" class="common_submit_button" id="musicUpdateButton">
-                수정
-            </button>
-
             <input type="hidden" id="updateIdInput" name="updateId">
             <input type="hidden" id="updateCategoryIdInput" name="updateCategoryId">
+            <input type="hidden" id="updateCategoryNameInput" name="updateCategoryName">
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
             <input type="hidden" name="_method" value="PATCH"/>
         </form>
+
+        <button class="common_red_button music_test_button" id="musicTestButton">
+            플레이어 테스트
+        </button>
+
+        <div class="music_test_container" id="musicTestContainer">
+            <!-- 뮤직 플레이어 -->
+        </div>
+
+        <button type="button" class="common_submit_button" id="musicUpdateButton">
+            수정
+        </button>
     </div>
 </div>
 <script th:inline="javascript">
@@ -163,6 +171,7 @@
     document.getElementById("updateMusicCategoryListSelect").value = selectMusicCategoryId;
     document.getElementById("updateIdInput").value = selectMusicId;
     let updateCategoryOption = document.getElementById("updateMusicCategoryListSelect").options[musicUpdateInput["updateCategoryId"]];
+    document.getElementById("updateCategoryNameInput").value = updateCategoryOption.text;
     updateCategoryOption.select = true;
 </script>
 </body>

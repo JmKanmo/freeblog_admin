@@ -43,3 +43,11 @@
 .music_category_select {
     margin-left: 10px;
 }
+
+.music_add_container .music_test_button {
+    margin-top: 20px;
+}
+
+.music_add_container .music_test_container {
+    margin-top: 10px;
+}

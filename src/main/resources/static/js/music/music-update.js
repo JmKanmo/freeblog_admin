@@ -13,7 +13,12 @@ class MusicUpdateController extends UtilController {
         this.updateCoverInput = document.getElementById("updateCoverInput");
         this.updateLrcInput = document.getElementById("updateLrcInput");
         this.updateCategoryIdInput = document.getElementById("updateCategoryIdInput");
+        this.updateCategoryNameInput = document.getElementById("updateCategoryNameInput");
         this.musicUpdateButton = document.getElementById("musicUpdateButton");
+
+        this.musicTestContainer = document.getElementById("musicTestContainer");
+        this.musicTestButton = document.getElementById("musicTestButton");
+        this.musicUtilController = new MusicUtilController();
     }
 
     initMusicUpdateController() {
@@ -23,6 +28,8 @@ class MusicUpdateController extends UtilController {
     initEventListener() {
         this.updateMusicCategoryListSelect.addEventListener("change", evt => {
             this.updateCategoryIdInput.value = this.updateMusicCategoryListSelect.value;
+            let updateCategoryOption = this.updateMusicCategoryListSelect.options[this.updateCategoryIdInput.value];
+            this.updateCategoryNameInput.value = updateCategoryOption.text;
         });
 
         this.musicListSelect.addEventListener("change", evt => {
@@ -47,6 +54,7 @@ class MusicUpdateController extends UtilController {
                     this.updateCategoryIdInput.value = responseValue["categoryId"];
                     this.updateMusicCategoryListSelect.value = responseValue["categoryId"];
                     this.updateMusicCategoryListSelect.text = responseValue["categoryName"];
+                    this.updateCategoryNameInput.value = this.updateMusicCategoryListSelect.text;
                 }
             });
 
@@ -92,6 +100,48 @@ class MusicUpdateController extends UtilController {
             if (confirm("뮤직 정보를 수정 하겠습니까?")) {
                 this.musicUpdateForm.submit();
             }
+        });
+
+        this.musicTestButton.addEventListener("click", evt => {
+            const musicTestPlayerElement = document.createElement('div');
+            musicTestPlayerElement.className = `audio_player_style`;
+            musicTestPlayerElement.id = `audio_player`;
+            this.musicTestContainer.appendChild(musicTestPlayerElement);
+
+            const musicMap = new Map();
+            const musicCategoryMap = new Map();
+            const musicConfigMap = new Map();
+
+            musicConfigMap.set('config', {
+                listFolded: true,
+                listMaxHeight: 90,
+                lrcType: 0,
+                autoplay: false,
+                mutex: true,
+                order: 'random',
+                mode: {
+                    fixed: true,
+                    mini: false
+                }
+            });
+
+            musicCategoryMap.set(this.updateCategoryNameInput.value, {
+                name: this.updateCategoryNameInput.value,
+                audio: [
+                    {
+                        name: this.updateNameInput.value,
+                        artist: this.updateArtistInput.value,
+                        url: this.updateUrlInput.value,
+                        cover: this.updateCoverInput.value,
+                        theme: this.updateCategoryNameInput.value
+                    }
+                ]
+            });
+
+            musicMap.set('data', musicCategoryMap);
+            musicMap.set('config', musicConfigMap.get('config'));
+
+            this.musicUtilController.initAudioPlayer(musicMap);
         });
     }
 }

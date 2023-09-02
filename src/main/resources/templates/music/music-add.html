@@ -104,17 +104,27 @@
                   class="validation_error"></span>
         </div>
 
-        <button type="button" class="common_submit_button" id="musicAddButton">
-            등록
-        </button>
-
         <input type="hidden" id="musicCategoryIdHiddenInput" name="categoryId">
+        <input type="hidden" id="musicCategoryNameHiddenInput">
         <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
     </form>
+
+    <button class="common_red_button music_test_button" id="musicTestButton">
+        플레이어 테스트
+    </button>
+
+    <div class="music_test_container" id="musicTestContainer">
+        <!-- 뮤직 플레이어 -->
+    </div>
+
+    <button type="button" class="common_submit_button" id="musicAddButton">
+        등록
+    </button>
 </div>
 <script th:inline="javascript">
     const selectMusicCategoryId = document.getElementById("musicCategoryList").value;
     document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
+    document.getElementById("musicCategoryNameHiddenInput").value = document.getElementById("musicCategoryList").options[selectMusicCategoryId].text;
 </script>
 </body>
 </html>

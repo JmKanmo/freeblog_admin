@@ -5,12 +5,13 @@ class MusicUtilController {
     }
 
     initAudioPlayer(musicMap, find) {
-        const musicConfig = musicMap["config"];
-        const musicData = musicMap["data"];
-        if (musicMap) {
-            for (const data in musicData) {
-                const category = musicData[data]["name"];
-                const audios = musicData[data]["audio"];
+        const musicConfig = musicMap.get("config");
+        const musicData = musicMap.get("data");
+
+        if (musicMap && musicConfig) {
+            musicData.forEach((value, key) => {
+                const category = key;
+                const audios = value["audio"];
 
                 this.musicPlayer.set(category, new APlayer({
                     container: document.getElementById(this.documentId),
@@ -24,7 +25,7 @@ class MusicUtilController {
                     fixed: musicConfig["fixed"],
                     audio: audios
                 }));
-            }
+            });
         }
         return null;
     }

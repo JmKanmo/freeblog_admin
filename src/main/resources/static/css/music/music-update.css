@@ -57,3 +57,11 @@
     margin-top: 10px;
     padding: 10px;
 }
+
+.music_update_container .music_test_button {
+    margin-top: 20px;
+}
+
+.music_update_container .music_test_container {
+    margin-top: 10px;
+}
