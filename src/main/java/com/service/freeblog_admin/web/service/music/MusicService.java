@@ -6,6 +6,7 @@ import com.service.freeblog_admin.web.dto.music.MusicDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.music.MusicManageException;
 import com.service.freeblog_admin.web.model.music.MusicAddInput;
+import com.service.freeblog_admin.web.model.music.MusicDeleteInput;
 import com.service.freeblog_admin.web.model.music.MusicUpdateInput;
 import com.service.freeblog_admin.web.repository.music.MusicRepository;
 import lombok.RequiredArgsConstructor;
@@ -33,6 +34,12 @@ public class MusicService {
         MusicCategory musicCategory = musicCategoryService.findMusicCategoryById(musicUpdateInput.getUpdateCategoryId());
         Music music = findMusicById(musicUpdateInput.getUpdateId());
         music.update(musicUpdateInput, musicCategory);
+    }
+
+    @Transactional
+    public void musicDelete(MusicDeleteInput musicDeleteInput) {
+        Music music = findMusicById(musicDeleteInput.getDeleteId());
+        musicRepository.delete(music);
     }
 
     public MusicDto findMusicDtoById(Long musicId) {

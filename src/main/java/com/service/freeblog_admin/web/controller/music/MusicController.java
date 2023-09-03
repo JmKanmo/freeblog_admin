@@ -6,6 +6,8 @@ import com.service.freeblog_admin.web.dto.music.MusicDto;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminException;
 import com.service.freeblog_admin.web.model.music.MusicAddInput;
+import com.service.freeblog_admin.web.model.music.MusicCategoryDeleteInput;
+import com.service.freeblog_admin.web.model.music.MusicDeleteInput;
 import com.service.freeblog_admin.web.model.music.MusicUpdateInput;
 import com.service.freeblog_admin.web.service.music.MusicCategoryService;
 import com.service.freeblog_admin.web.service.music.MusicService;
@@ -19,10 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -82,6 +81,45 @@ public class MusicController {
         model.addAttribute("music_list", musicDtoList);
         model.addAttribute("musicUpdateInput", MusicUpdateInput.from(musicDto));
         return "music/music-update";
+    }
+
+    @Operation(summary = "음악 설정 페이지 반환", description = "음악 설정 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 설정 정보가 담긴 관리 페이지")
+    })
+    @GetMapping("/delete")
+    public String musicDelete(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+
+        List<MusicCategoryDto> musicCategoryDtoList = musicCategoryService.findMusicCategoryDtoList();
+        List<MusicDto> musicDtoList = musicCategoryDtoList.isEmpty() ? Collections.emptyList() : musicCategoryService.findMusicDtoByCategoryId(musicCategoryDtoList.get(0).getId());
+        MusicDto musicDto = musicService.findMusicDtoById(musicDtoList.get(0).getId());
+
+        model.addAttribute("music_category_list", musicCategoryDtoList);
+        model.addAttribute("music_list", musicDtoList);
+        model.addAttribute("musicDeleteInput", MusicDeleteInput.from(musicDto));
+        return "music/music-delete";
+    }
+
+    @Operation(summary = "음악 삭제 작업", description = "음악 삭제 작업 진행")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 삭제 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 음악 삭제 작업 실패")
+    })
+    @DeleteMapping("/delete")
+    public String musicDelete(MusicDeleteInput musicDeleteInput, BindingResult bindingResult, Model model, Authentication authentication) {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+
+        if (bindingResult.hasErrors()) {
+            return "music/music-delete";
+        }
+
+        musicService.musicDelete(musicDeleteInput);
+        return "redirect:/music/delete";
     }
 
     @Operation(summary = "음악 추가 작업", description = "음악 추가 작업 진행")

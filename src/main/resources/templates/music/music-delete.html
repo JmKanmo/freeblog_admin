@@ -1,10 +1,65 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>뮤직 삭제</title>
+    <title>뮤직 삭제 페이지</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/music/music-delete.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/music/music-delete.js}"></script>
 </head>
-<body>
 
+<body>
+<h3 class="music_delete_title common_dark_green_text">
+    뮤직 정보 삭제
+</h3>
+
+<div class="music_delete_container common_form_container">
+    <div class="common_input_div input_block clear_fix">
+        <label for="musicCategoryListSelect" class="common_input_label common_category_label" title="제목">
+            <span class="blind">카테고리</span>
+        </label>
+
+        <span class="common_dark_cyan_text">
+                뮤직 카테고리
+            </span>
+
+        <select class="music_category_select" id="musicCategoryListSelect">
+            <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
+                    th:text="${musicCategory.name}">
+            </option>
+        </select>
+    </div>
+
+    <div class="common_input_div input_block clear_fix music_list_container">
+        <label for="musicListSelect" class="common_input_label common_category_label" title="제목">
+            <span class="blind">뮤직</span>
+        </label>
+
+        <span class="common_dark_cyan_text">
+                뮤직 목록
+            </span>
+
+        <select class="music_select" id="musicListSelect">
+            <option th:each="music : ${music_list}" th:value="${music.id}"
+                    th:text="${music.name}">
+            </option>
+        </select>
+    </div>
+
+    <form method="post" class="music_delete_form" id="musicDeleteForm" action="/music/delete">
+        <input type="hidden" id="deleteIdHiddenInput" name="deleteId">
+        <input type="hidden" id="deleteCategoryIdHiddenInput" name="deleteCategoryId">
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+        <input type="hidden" name="_method" value="DELETE"/>
+    </form>
+
+    <button type="button" class="common_submit_button" id="musicDeleteButton">
+        삭제
+    </button>
+</div>
+<script th:inline="javascript">
+    this.deleteCategoryIdHiddenInput.value = this.musicCategoryListSelect.value;
+    this.deleteIdHiddenInput.value = this.musicListSelect.value;
+</script>
 </body>
 </html>

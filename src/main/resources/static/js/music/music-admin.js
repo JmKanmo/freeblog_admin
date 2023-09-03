@@ -4,6 +4,7 @@ class MusicController extends UtilController {
         this.musicUtilController = new MusicUtilController();
         this.musicAddButton = document.getElementById("musicAddButton");
         this.musicUpdateButton = document.getElementById("musicUpdateButton");
+        this.musicDeleteButton = document.getElementById("musicDeleteButton");
         this.musicCategoryAddButton = document.getElementById("musicCategoryAddButton");
         this.musicCategoryUpdateButton = document.getElementById("musicCategoryUpdateButton");
         this.musicCategoryDeleteButton = document.getElementById("musicCategoryDeleteButton");
@@ -220,6 +221,10 @@ class MusicController extends UtilController {
 
         this.musicUpdateButton.addEventListener("click", evt => {
             this.openPopUp(988, 750, '/music/update', 'popup');
+        });
+
+        this.musicDeleteButton.addEventListener("click", evt => {
+            this.openPopUp(988, 750, '/music/delete', 'popup');
         });
 
         this.musicCategoryAddButton.addEventListener("click", evt => {

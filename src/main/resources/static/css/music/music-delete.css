@@ -1,0 +1,28 @@
+.music_delete_title {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.music_delete_container {
+    padding: 20px 20px 30px 20px;
+    margin-top: 30px;
+    border: 1px solid #eeeeee;
+}
+
+.music_category_select {
+    margin-left: 10px;
+}
+
+.music_select {
+    margin-left: 10px;
+}
+
+.music_delete_container .music_list_container {
+    padding-bottom: 20px;
+}
+
+.music_delete_container .music_delete_form_container {
+    border: 1px solid #ade2ba;
+    margin-top: 10px;
+    padding: 10px;
+}
