@@ -41,6 +41,7 @@ class MusicAddController extends UtilController {
             const musicCategoryMap = new Map();
             const musicConfigMap = new Map();
 
+            // 기본 값 지정
             musicConfigMap.set('config', {
                 listFolded: true,
                 listMaxHeight: 90,

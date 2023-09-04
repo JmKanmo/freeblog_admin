@@ -20,10 +20,10 @@
         <div class="music_player_container">
             <div class="audioPlayerBlock">
                 <div class="music_category_select_container">
-                    <select>
-                        <option value="1">Americano</option>
-                        <option value="2">Latte</option>
-                        <option value="3">Green Tea</option>
+                    <select id="musicCategoryList">
+                        <option th:each="musicCategory : ${music_category_list}" th:value="${musicCategory.id}"
+                                th:text="${musicCategory.name}">
+                        </option>
                     </select>
                 </div>
 
@@ -56,11 +56,17 @@
                         </button>
                     </div>
                 </div>
-
                 <div class="audio_player_style" id="audio_player"></div>
             </div>
         </div>
     </div>
+    <input type="hidden" id="musicCategoryIdHiddenInput" name="categoryId">
+    <input type="hidden" id="musicCategoryNameHiddenInput">
+    <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+
+    <script th:inline="javascript">
+        <!-- TODO -->
+    </script>
 </div>
 <div th:replace="fragments/footer::footer"></div>
 </body>

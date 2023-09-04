@@ -1,4 +1,4 @@
-package com.service.freeblog_admin.web.controller.music;
+package com.service.freeblog_admin.web.controller.music.rest;
 
 import com.service.freeblog_admin.util.BlogAdminUtil;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;

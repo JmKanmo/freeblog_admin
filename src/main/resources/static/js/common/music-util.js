@@ -9,11 +9,8 @@ class MusicUtilController {
         const musicData = musicMap.get("data");
 
         if (musicMap && musicConfig) {
-            musicData.forEach((value, key) => {
-                const category = key;
-                const audios = value["audio"];
-
-                this.musicPlayer.set(category, new APlayer({
+            if (musicData.size <= 0) {
+                this.musicPlayer.set("NONE", new APlayer({
                     container: document.getElementById(this.documentId),
                     listFolded: musicConfig["listFolded"],
                     listMaxHeight: musicConfig["listMaxHeight"],
@@ -23,9 +20,27 @@ class MusicUtilController {
                     order: musicConfig["order"],
                     mini: musicConfig["mini"],
                     fixed: musicConfig["fixed"],
-                    audio: audios
+                    audio: []
                 }));
-            });
+            } else {
+                musicData.forEach((value, key) => {
+                    const category = key;
+                    const audios = value["audio"];
+
+                    this.musicPlayer.set(category, new APlayer({
+                        container: document.getElementById(this.documentId),
+                        listFolded: musicConfig["listFolded"],
+                        listMaxHeight: musicConfig["listMaxHeight"],
+                        lrcType: musicConfig["lrcType"],
+                        autoplay: musicConfig["autoplay"],
+                        mutex: musicConfig["mutex"],
+                        order: musicConfig["order"],
+                        mini: musicConfig["mini"],
+                        fixed: musicConfig["fixed"],
+                        audio: audios
+                    }));
+                });
+            }
         }
         return null;
     }
