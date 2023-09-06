@@ -171,8 +171,11 @@
     document.getElementById("updateMusicCategoryListSelect").value = selectMusicCategoryId;
     document.getElementById("updateIdInput").value = selectMusicId;
     let updateCategoryOption = document.getElementById("updateMusicCategoryListSelect").options[musicUpdateInput["updateCategoryId"]];
-    document.getElementById("updateCategoryNameInput").value = updateCategoryOption.text;
-    updateCategoryOption.select = true;
+
+    if (updateCategoryOption) {
+        document.getElementById("updateCategoryNameInput").value = updateCategoryOption.text;
+        updateCategoryOption.select = true;
+    }
 </script>
 </body>
 </html>

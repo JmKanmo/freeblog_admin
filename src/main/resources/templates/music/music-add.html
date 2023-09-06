@@ -122,9 +122,19 @@
     </button>
 </div>
 <script th:inline="javascript">
-    const selectMusicCategoryId = document.getElementById("musicCategoryList").value;
+    const musicCategoryList = document.getElementById("musicCategoryList");
+    const selectMusicCategoryId = !musicCategoryList.value ? 0 : musicCategoryList.value;
+    const selectMusicCategoryListOptions = musicCategoryList.options[selectMusicCategoryId];
     document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
-    document.getElementById("musicCategoryNameHiddenInput").value = document.getElementById("musicCategoryList").options[selectMusicCategoryId].text;
+
+    if (!selectMusicCategoryListOptions) {
+        const option = document.createElement("option");
+        option.text = "없음";
+        option.value = "0";
+        musicCategoryList.add(option);
+    } else {
+        document.getElementById("musicCategoryNameHiddenInput").value = selectMusicCategoryListOptions.text;
+    }
 </script>
 </body>
 </html>

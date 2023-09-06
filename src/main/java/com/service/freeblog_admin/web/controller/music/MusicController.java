@@ -77,7 +77,7 @@ public class MusicController {
 
         List<MusicCategoryDto> musicCategoryDtoList = musicCategoryService.findMusicCategoryDtoList();
         List<MusicDto> musicDtoList = musicCategoryDtoList.isEmpty() ? Collections.emptyList() : musicCategoryService.findMusicDtoByCategoryId(musicCategoryDtoList.get(0).getId());
-        MusicDto musicDto = musicService.findMusicDtoById(musicDtoList.get(0).getId());
+        MusicDto musicDto = musicDtoList.isEmpty() ? MusicDto.builder().build() : musicService.findMusicDtoById(musicDtoList.get(0).getId());
 
         model.addAttribute("music_category_list", musicCategoryDtoList);
         model.addAttribute("music_list", musicDtoList);
@@ -97,7 +97,7 @@ public class MusicController {
 
         List<MusicCategoryDto> musicCategoryDtoList = musicCategoryService.findMusicCategoryDtoList();
         List<MusicDto> musicDtoList = musicCategoryDtoList.isEmpty() ? Collections.emptyList() : musicCategoryService.findMusicDtoByCategoryId(musicCategoryDtoList.get(0).getId());
-        MusicDto musicDto = musicService.findMusicDtoById(musicDtoList.get(0).getId());
+        MusicDto musicDto = musicDtoList.isEmpty() ? MusicDto.builder().build() : musicService.findMusicDtoById(musicDtoList.get(0).getId());
 
         model.addAttribute("music_category_list", musicCategoryDtoList);
         model.addAttribute("music_list", musicDtoList);
