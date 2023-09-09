@@ -31,7 +31,7 @@ class MusicController extends UtilController {
             return;
         }
 
-        document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryId].text;
+        document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryId - 1].text;
         this.#requestMusicInfo(selectMusicCategoryId);
     }
 
@@ -39,8 +39,8 @@ class MusicController extends UtilController {
         this.musicCategoryList.addEventListener("change", evt => {
             const selectMusicCategoryId = this.musicCategoryList.value;
             document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
-            document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryId].text;
-            this.#requestMusicCategoryInfo();
+            document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryId - 1].text;
+            this.#requestMusicCategoryInfo(selectMusicCategoryId);
         });
 
         this.musicAddButton.addEventListener("click", evt => {
@@ -141,7 +141,7 @@ class MusicController extends UtilController {
         xhr.send();
     }
 
-    #requestMusicCategoryInfo() {
+    #requestMusicCategoryInfo(selectMusicCategoryId) {
         const xhr = new XMLHttpRequest();
 
         xhr.open("GET", `/music-category/search/music/${selectMusicCategoryId}`, true);
