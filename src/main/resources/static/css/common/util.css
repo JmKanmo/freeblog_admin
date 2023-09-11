@@ -330,6 +330,18 @@ input:focus {
     background-color: #d78252;
 }
 
+.common_green_button {
+    font-size: 12px;
+    height: 30px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 3px;
+    transition-duration: 0.3s;
+    box-shadow: 3px 3px 3px #eeeeee;
+    border: 1px solid #2dd553;
+    background-color: #2dd553;
+}
+
 .common_blue_button {
     font-size: 12px;
     height: 30px;

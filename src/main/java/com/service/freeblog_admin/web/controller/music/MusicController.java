@@ -22,6 +22,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
@@ -63,6 +64,18 @@ public class MusicController {
         model.addAttribute("music_category_list", musicCategoryService.findMusicCategoryDtoList());
         model.addAttribute("musicAddInput", MusicAddInput.builder().build());
         return "music/music-add";
+    }
+
+    @Operation(summary = "음악 S3 추가 페이지 반환", description = "음악 S3 추가 페이지를 반환하는 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 S3 추가 정보가 담긴 관리 페이지")
+    })
+    @GetMapping("/add/s3")
+    public String musicS3Add(Model model, Authentication authentication, HttpServletRequest httpServletRequest) throws Exception {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        return "music/music-add-s3";
     }
 
     @Operation(summary = "음악 설정 페이지 반환", description = "음악 설정 페이지를 반환하는 GET 메서드")
@@ -141,6 +154,23 @@ public class MusicController {
 
         musicService.musicAdd(musicAddInput);
         return "redirect:/music/add";
+    }
+
+    @Operation(summary = "음악 추가 작업", description = "음악 추가 작업 진행")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "음악 추가 작업 성공"),
+            @ApiResponse(responseCode = "500", description = "DB 연결 오류, SQL 쿼리 수행 실패 등의 이유로 음악 추가 작업 실패")
+    })
+    @PostMapping("/add/s3")
+    public String musicAddS3(
+            @RequestParam("musicFile") MultipartFile musicFile,
+            @RequestParam("musicImage") MultipartFile musicImage, Model model,
+            Authentication authentication) {
+        if (!BlogAdminUtil.isAuth(authentication)) {
+            throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+        }
+        // TODO
+        return "redirect:/music/add/s3";
     }
 
     @Operation(summary = "음악 수정 작업", description = "음악 수정 작업 진행")
