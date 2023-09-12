@@ -1,8 +1,10 @@
 package com.service.freeblog_admin.util;
 
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.BlogAdminServiceException;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.dao.DataAccessException;
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.Authentication;
@@ -66,21 +68,42 @@ public class BlogAdminUtil {
         return LocalDateTime.now(ZoneId.of(ConstUtil.ASIA_SEOUL));
     }
 
+
+    public static String getAudioFileUUID(MultipartFile multipartFile) {
+        String fileName = multipartFile.getOriginalFilename();
+        String extension = getAudioExtension(fileName.substring(fileName.lastIndexOf(".") + 1));
+        String uuid = LocalDateTime.now().toString() + UUID.nameUUIDFromBytes(fileName.getBytes(StandardCharsets.UTF_8)) + "." + extension;
+        return uuid;
+    }
+
     public static String getImageFileUUID(MultipartFile multipartFile) {
         String fileName = multipartFile.getOriginalFilename();
-        String extension = fileName.substring(fileName.lastIndexOf(".") + 1);
+        String extension = getImageExtension(fileName.substring(fileName.lastIndexOf(".") + 1));
         String uuid = LocalDateTime.now().toString() + UUID.nameUUIDFromBytes(fileName.getBytes(StandardCharsets.UTF_8)) + "." + extension;
         return uuid;
     }
 
     public static String getImageFileUUIDBySftp(MultipartFile multipartFile) {
         String fileName = multipartFile.getContentType();
-        String extension = getImageException(fileName.substring(fileName.lastIndexOf("/") + 1));
+        String extension = getImageExtension(fileName.substring(fileName.lastIndexOf("/") + 1));
         String uuid = UUID.randomUUID() + "." + extension;
         return uuid;
     }
 
-    public static String getImageException(String extension) {
+    public static String getAudioExtension(String extension) {
+        if (extension == null || extension.isEmpty()) {
+            return "mp3";
+        }
+
+        switch (extension) {
+            case "mp3":
+                return extension;
+            default:
+                return "mp3";
+        }
+    }
+
+    public static String getImageExtension(String extension) {
         if (extension == null || extension.isEmpty()) {
             return "png";
         }
@@ -93,6 +116,12 @@ public class BlogAdminUtil {
             default:
                 return extension;
         }
+    }
+
+    public static ObjectMetadata initObjectMetaData(MultipartFile multipartFile) {
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(multipartFile.getContentType());
+        return objectMetadata;
     }
 
     public static String getErrorMessage(Exception exception) {

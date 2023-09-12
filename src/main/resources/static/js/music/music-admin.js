@@ -10,6 +10,7 @@ class MusicController extends UtilController {
         this.musicCategoryUpdateButton = document.getElementById("musicCategoryUpdateButton");
         this.musicCategoryDeleteButton = document.getElementById("musicCategoryDeleteButton");
         this.musicS3AddButton = document.getElementById("musicS3AddButton");
+        this.musicS3SearchButton = document.getElementById("musicS3SearchButton");
     }
 
     initMusicController() {
@@ -46,6 +47,10 @@ class MusicController extends UtilController {
 
         this.musicAddButton.addEventListener("click", evt => {
             this.openPopUp(988, 750, '/music/add', 'popup');
+        });
+
+        this.musicS3SearchButton.addEventListener("click", evt => {
+            this.openPopUp(988, 750, '/music/search/s3', 'popup');
         });
 
         this.musicS3AddButton.addEventListener("click", evt => {

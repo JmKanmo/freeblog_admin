@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>뮤직 S3 조회 페이지</title>
+    <th:block th:replace="fragments/config :: config"></th:block>
+    <link th:href="@{/css/common/json-util.css}" type="text/css" rel="stylesheet">
+    <link th:href="@{/css/music/music-search-s3.css}" type="text/css" rel="stylesheet">
+    <script type="text/javascript" th:src="@{/js/common/json-util.js}"></script>
+    <script type="text/javascript" th:src="@{/js/music/music-search-s3.js}"></script>
+</head>
+
+<body>
+<h3 class="music_search_title common_dark_green_text">
+    S3 입력 뮤직 관련 파일 정보 입력
+</h3>
+
+<div class="music_search_container common_form_container">
+    <div class="common_input_div input_block clear_fix">
+        <label for="searchKeyword" class="common_input_label common_email_label" title="업로드키">
+            <span class="blind">키워드</span>
+        </label>
+
+        <input type="text" id="searchKeyword" name="keyword" maxlength="255" placeholder="검색 키워드를 입력하세요. (최대 255글자)">
+    </div>
+
+    <button type="button" class="common_submit_button" id="musicS3SearchButton">
+        조회
+    </button>
+</div>
+
+<div class="upload_result_container">
+    <h3 class="upload_result_banner">응답 결과</h3>
+    <div class="upload_result_box" id="uploadResultBox"></div>
+</div>
+<script th:inline="javascript">
+    <!-- TODO -->
+</script>
+</body>
+</html>

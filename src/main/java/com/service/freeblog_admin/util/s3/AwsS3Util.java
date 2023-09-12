@@ -28,7 +28,7 @@ public class AwsS3Util {
     public String storeAudioFile(String uuid, InputStream inputStream, ObjectMetadata objectMetadata) throws AmazonClientException {
         AmazonS3 amazonS3 = initAwsS3Object();
         amazonS3.putObject(awsS3Config.getBucketName(), String.format("audio/%s", uuid), inputStream, objectMetadata);
-        return String.format(ConstUtil.AWS_S3_IMAGE_URL, uuid);
+        return String.format(ConstUtil.AWS_S3_AUDIO_URL, uuid);
     }
 
     private AmazonS3 initAwsS3Object() {

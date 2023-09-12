@@ -1,26 +1,12 @@
-.music_add_title {
+.music_search_title {
     text-align: center;
     margin-top: 15px;
 }
 
-.music_add_container {
+.music_search_container {
     padding: 20px 20px 30px 20px;
     margin-top: 30px;
     border: 1px solid #eeeeee;
-}
-
-.music_add_container .music_file_input {
-    margin-left: 10px;
-    width: 350px;
-    height: 30px;
-}
-
-.music_add_container .upload_result_container {
-    width: 100%;
-    min-height: 100px;
-    border: 1px solid #efefef;
-    margin-top: 30px;
-    position: relative;
 }
 
 .upload_result_container .upload_result_banner {
