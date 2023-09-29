@@ -19,8 +19,9 @@ class MusicController extends UtilController {
     }
 
     initMusicPlayer() {
-        const selectMusicCategoryId = !this.musicCategoryList.value ? 0 : this.musicCategoryList.value;
-        const selectMusicCategoryListOptions = this.musicCategoryList.options[selectMusicCategoryId];
+        const selectMusicCategoryId = !this.musicCategoryList.value ? this.musicUtilController.TOTAL_MUSIC_CATEGORY_INDEX : this.musicCategoryList.value;
+        const selectMusicCategoryIndex = this.musicCategoryList.selectedIndex;
+        const selectMusicCategoryListOptions = this.musicCategoryList.options[selectMusicCategoryIndex];
 
         document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
 
@@ -33,15 +34,16 @@ class MusicController extends UtilController {
             return;
         }
 
-        document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryId - 1].text;
+        document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryIndex].text;
         this.#requestMusicInfo(selectMusicCategoryId);
     }
 
     initEventListener() {
         this.musicCategoryList.addEventListener("change", evt => {
             const selectMusicCategoryId = this.musicCategoryList.value;
+            const selectMusicCategoryIndex = this.musicCategoryList.selectedIndex;
             document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
-            document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryId - 1].text;
+            document.getElementById("musicCategoryNameHiddenInput").value = this.musicCategoryList.options[selectMusicCategoryIndex].text;
             this.#requestMusicCategoryInfo(selectMusicCategoryId);
         });
 

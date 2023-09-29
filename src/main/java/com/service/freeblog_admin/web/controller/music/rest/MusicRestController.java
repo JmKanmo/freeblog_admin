@@ -59,6 +59,24 @@ public class MusicRestController {
         }
     }
 
+    @Operation(summary = "키워드 기반 뮤직 S3 조회 데이터 반환", description = "키워드 기반 뮤직 S3 데이터 반환 GET 메서드")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "키워드 기반 뮤직 S3 조회 데이터 반환 작업 완료"),
+            @ApiResponse(responseCode = "500", description = "네트워크, 데이터베이스 저장 실패 등의 이유로 키워드 기반 뮤직 S3 조회 데이터 반환 작업 실패")
+    })
+    @GetMapping("/total-search/s3")
+    public ResponseEntity<?> searchTotalMusicS3ByKeyword(Authentication authentication) throws Exception {
+        try {
+            if (!BlogAdminUtil.isAuth(authentication)) {
+                throw new AdminException(ServiceExceptionMessage.NOT_AUTH_ACCESS.message());
+            }
+            return ResponseEntity.status(HttpStatus.OK).body(musicService.findTotalMusicS3Dto());
+        } catch (Exception exception) {
+            log.error("[MusicRestController:searchMusicS3ByKeyword] exception occured ", exception);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(String.format("키워드 기반 뮤직 S3 데이터 반환에 실패하였습니다. %s", BlogAdminUtil.getErrorMessage(exception)));
+        }
+    }
+
     @Operation(summary = "음악 S3 추가 작업", description = "음악 S3 추가 작업 진행")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "음악 S3 추가 작업 성공"),

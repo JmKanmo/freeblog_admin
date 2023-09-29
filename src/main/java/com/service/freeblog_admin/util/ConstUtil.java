@@ -11,4 +11,6 @@ public class ConstUtil {
 
     public static final int SFTP_POST_IMAGE_HASH = "post-image".hashCode();
     public static final String ASIA_SEOUL = "Asia/Seoul";
+
+    public static final String TOTAL = "전체";
 }

@@ -123,7 +123,7 @@
 </div>
 <script th:inline="javascript">
     const musicCategoryList = document.getElementById("musicCategoryList");
-    const selectMusicCategoryId = !musicCategoryList.value ? 0 : musicCategoryList.value;
+    const selectMusicCategoryId = !musicCategoryList.value ? this.musicUtilController.TOTAL_MUSIC_CATEGORY_INDEX : musicCategoryList.value;
     const selectMusicCategoryListOptions = musicCategoryList.options[selectMusicCategoryId];
     document.getElementById("musicCategoryIdHiddenInput").value = selectMusicCategoryId;
 

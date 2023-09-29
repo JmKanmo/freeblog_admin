@@ -2,6 +2,7 @@ class MusicUtilController {
     constructor() {
         this.musicPlayer = new Map();
         this.documentId = `audio_player`;
+        this.TOTAL_MUSIC_CATEGORY_INDEX = 1; // 전체 카테고리 디폴트 인덱스는 1로 규정
     }
 
     initAudioPlayer(musicMap, find) {

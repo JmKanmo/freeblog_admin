@@ -19,7 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Service
@@ -77,6 +79,16 @@ public class MusicService {
 
     public List<MusicS3Dto> findMusicS3DtoByKeyword(String keyword) {
         return musicS3Mapper.searchMusicS3ByKeyword(keyword);
+    }
+
+    public List<MusicS3Dto> findTotalMusicS3Dto() {
+        List<MusicS3> musicS3List = musicS3Repository.findAll();
+
+        if (musicS3List.isEmpty()) {
+            return Collections.emptyList();
+        } else {
+            return musicS3List.stream().map(MusicS3Dto::from).collect(Collectors.toList());
+        }
     }
 
     public MusicDto findMusicDtoById(Long musicId) {

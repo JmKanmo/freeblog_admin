@@ -1,5 +1,6 @@
 package com.service.freeblog_admin.web.service.music;
 
+import com.service.freeblog_admin.util.ConstUtil;
 import com.service.freeblog_admin.web.domain.music.Music;
 import com.service.freeblog_admin.web.domain.music.MusicCategory;
 import com.service.freeblog_admin.web.dto.music.MusicCategoryDto;
@@ -9,6 +10,7 @@ import com.service.freeblog_admin.web.error.model.music.MusicManageException;
 import com.service.freeblog_admin.web.model.music.MusicCategoryDeleteInput;
 import com.service.freeblog_admin.web.model.music.MusicCategoryUpdateInput;
 import com.service.freeblog_admin.web.repository.music.MusicCategoryRepository;
+import com.service.freeblog_admin.web.repository.music.MusicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,6 +26,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class MusicCategoryService {
     private final MusicCategoryRepository musicCategoryRepository;
+    private final MusicRepository musicRepository;
 
     @Transactional
     public void musicCategoryAdd(MusicCategory musicCategory) {
@@ -31,9 +34,19 @@ public class MusicCategoryService {
     }
 
     public List<MusicDto> findMusicDtoByCategoryId(Long musicCategoryId) {
-        MusicCategory musicCategory = findMusicCategoryById(musicCategoryId);
-        List<Music> musicList = musicCategory.getMusicList();
-        return musicList.stream().map(MusicDto::from).collect(Collectors.toList());
+        MusicCategoryDto musicCategoryDto = findMusicCategoryDtoById(musicCategoryId);
+
+        if (musicCategoryDto.getName().equals(ConstUtil.TOTAL)) {
+            // 전체 조회
+            List<Music> musicList = musicRepository.findAll();
+            List<MusicDto> musicDtoList = musicList.stream().map(MusicDto::from).collect(Collectors.toList());
+            return musicDtoList;
+        } else {
+            MusicCategory musicCategory = findMusicCategoryById(musicCategoryId);
+            List<Music> musicList = musicCategory.getMusicList();
+            List<MusicDto> musicDtoList = musicList.stream().map(MusicDto::from).collect(Collectors.toList());
+            return musicDtoList;
+        }
     }
 
     public List<MusicCategoryDto> findMusicCategoryDtoList() {
