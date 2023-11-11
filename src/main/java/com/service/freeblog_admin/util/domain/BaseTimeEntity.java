@@ -4,12 +4,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.ColumnDefault;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import reactor.util.annotation.Nullable;
 
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.PrePersist;
 import java.time.LocalDateTime;
 
 @Data
@@ -24,6 +27,8 @@ public abstract class BaseTimeEntity {
      * TRUE: 서버 기본 시간(UTC,GMT) 기준의 시간 데이터 저장
      * FALSE: (Asia/Seoul 타임존) 기준의 시간 데이터 저장 (기존에 저장 및 관리 된 데이터 호환)
      */
+    @Nullable
+    @ColumnDefault("true")
     private Boolean isBaseTimezone;
 
     @CreatedDate
@@ -31,4 +36,9 @@ public abstract class BaseTimeEntity {
 
     @LastModifiedDate
     private LocalDateTime updateTime;
+
+    @PrePersist
+    public void init() {
+        this.isBaseTimezone = true;
+    }
 }

@@ -11,7 +11,7 @@
 
 .notice_detail_container .notice_detail_title_container .notice_detail_update_board {
     position: absolute;
-    right: 0;
+    right: -160px;
     top: -5px;
 }
 
@@ -32,7 +32,7 @@
 
 .notice_detail_container .notice_detail_title_container .notice_detail_date {
     color: #557A74;
-    float: right;
+    /*float: right;*/
     font-size: 11px;
     margin-top: 10px;
 }

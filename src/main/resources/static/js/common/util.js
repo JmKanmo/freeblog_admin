@@ -57,7 +57,7 @@ class UtilController {
         });
 
         Handlebars.registerHelper('getInnerText', tag => {
-            if (!tag) {
+            if (tag == null) {
                 return 'UNDEFINED';
             }
             return tag.replace(/(<([^>]+)>)/ig, "");

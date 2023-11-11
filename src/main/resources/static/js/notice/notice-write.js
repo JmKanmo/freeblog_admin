@@ -138,9 +138,9 @@ class NoticeWriteController extends UtilController {
 
     checkPostSubmitInfo() {
         if (!this.noticeTitle.value ||
-            (this.noticeWriterEditor.root.innerText === '\n' ||
-                this.noticeWriterEditor.root.innerText.replace(/ /g, "") === '\n') ||
-            !this.noticeWriterEditor.root.innerText.replace(/ /g, "")) {
+            ((this.noticeWriterEditor.root.innerText === null || this.getRemoveSpaceStr(this.noticeWriterEditor.root.innerHTML) === "<p></p>") ||
+                (this.noticeWriterEditor.root.innerText.replace(/ /g, "") === null || this.getRemoveSpaceStr(this.noticeWriterEditor.root.innerHTML) === "<p></p>")) ||
+            (!this.noticeWriterEditor.root.innerText.replace(/ /g, "") === null || this.getRemoveSpaceStr(this.noticeWriterEditor.root.innerHTML) === "<p></p>")) {
             return true;
         } else {
             return false;

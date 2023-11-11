@@ -101,9 +101,9 @@ class NoticeUpdateController extends UtilController {
 
     checkNoticeUpdateInfo() {
         if (!this.noticeTitle.value ||
-            (this.noticeUpdateEditor.root.innerText === '\n' ||
-                this.noticeUpdateEditor.root.innerText.replace(/ /g, "") === '\n') ||
-            !this.noticeUpdateEditor.root.innerText.replace(/ /g, "")) {
+            ((this.noticeUpdateEditor.root.innerText === null || this.getRemoveSpaceStr(this.noticeUpdateEditor.root.innerHTML) === "<p></p>") ||
+                (this.noticeUpdateEditor.root.innerText.replace(/ /g, "") === null || this.getRemoveSpaceStr(this.noticeUpdateEditor.root.innerHTML) === "<p></p>")) ||
+            (!this.noticeUpdateEditor.root.innerText.replace(/ /g, "") === null || this.getRemoveSpaceStr(this.noticeUpdateEditor.root.innerHTML) === "<p></p>")) {
             return true;
         } else {
             return false;
