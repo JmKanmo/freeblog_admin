@@ -12,4 +12,5 @@ public class NoticeDto {
     private final String title;
     private final String summary;
     private final String contents;
+    private final Boolean isBaseTimezone;
 }

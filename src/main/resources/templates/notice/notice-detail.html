@@ -34,8 +34,8 @@
             공지사항 제목
         </h3>
 
-        <h3 class="notice_detail_date" th:text="${noticeDetail.registerTime}">
-            2023.06.18 22:37:23
+        <h3 class="notice_detail_date" id="noticeDetailDate">
+            1970.00.00 00:00:00
         </h3>
 
         <div class="notice_detail_contents_container">
@@ -55,8 +55,12 @@
     <input type="hidden" id="hidden_notice_content" readonly>
 
     <script th:inline="javascript">
+        const utilController = new UtilController();
         const noticeContent = [[${noticeDetail.contents}]];
+        const registerTime = [[${noticeDetail.registerTime}]];
+        const isBaseTimezone = [[${noticeDetail.isBaseTimezone}]]; // 베이스 타임존 여부
         document.getElementById("hidden_notice_content").value = noticeContent;
+        document.getElementById("noticeDetailDate").innerText = utilController.convertTimeByBrowserTimezone(registerTime, 'YYYY-MM-DD HH:mm:ss', isBaseTimezone);
     </script>
 </div>
 <div th:replace="fragments/footer::footer"></div>

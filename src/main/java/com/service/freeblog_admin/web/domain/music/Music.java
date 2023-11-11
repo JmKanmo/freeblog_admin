@@ -4,12 +4,13 @@ import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.model.music.MusicAddInput;
 import com.service.freeblog_admin.web.model.music.MusicUpdateInput;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "music")
@@ -41,6 +42,7 @@ public class Music extends BaseTimeEntity {
                 .cover(musicAddInput.getCover())
                 .lrc(musicAddInput.getLrc())
                 .musicCategory(musicCategory)
+                .isBaseTimezone(true)
                 .build();
     }
 

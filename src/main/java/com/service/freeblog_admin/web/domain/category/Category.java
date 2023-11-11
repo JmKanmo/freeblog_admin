@@ -4,6 +4,7 @@ import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.domain.blog.Blog;
 import com.service.freeblog_admin.web.domain.post.Post;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -13,7 +14,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString(exclude = "blog")

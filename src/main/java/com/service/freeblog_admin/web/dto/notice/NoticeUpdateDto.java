@@ -15,6 +15,7 @@ public class NoticeUpdateDto {
     private String uploadKey;
     private final String registerTime;
     private final String updateTime;
+    private final Boolean isBaseTimezone;
 
     public static NoticeUpdateDto from(Notice notice) {
         return NoticeUpdateDto.builder()
@@ -25,6 +26,7 @@ public class NoticeUpdateDto {
                 .uploadKey(notice.getUploadKey())
                 .registerTime(BlogAdminUtil.formatLocalDateTimeToStr(notice.getRegisterTime()))
                 .updateTime(BlogAdminUtil.formatLocalDateTimeToStr(notice.getUpdateTime()))
+                .isBaseTimezone(notice.getIsBaseTimezone())
                 .build();
     }
 }

@@ -13,4 +13,6 @@ public class ConstUtil {
     public static final String ASIA_SEOUL = "Asia/Seoul";
 
     public static final String TOTAL = "전체";
+
+    public static final String DEFAULT_SERVER_TIMEZONE = "UTC";
 }

@@ -18,6 +18,8 @@ public class AdminUserDto {
 
     private final String updatedTime;
 
+    private final Boolean isBaseTimezone;
+
     public static AdminUserDto from(AdminUser adminUser) {
         return AdminUserDto.builder()
                 .userId(adminUser.getUserId())
@@ -25,6 +27,7 @@ public class AdminUserDto {
                 .nickname(adminUser.getNickname())
                 .registerTime(BlogAdminUtil.formatLocalDateTimeToStr(adminUser.getRegisterTime()))
                 .updatedTime(BlogAdminUtil.formatLocalDateTimeToStr(adminUser.getUpdateTime()))
+                .isBaseTimezone(adminUser.getIsBaseTimezone())
                 .build();
     }
 }

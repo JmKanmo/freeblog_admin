@@ -12,6 +12,7 @@ public class MusicCategoryDto {
     private final String name;
     private final String registerTime;
     private final String updateTime;
+    private final Boolean isBaseTimezone;
 
     public static MusicCategoryDto from(MusicCategory musicCategory) {
         return MusicCategoryDto.builder()
@@ -19,6 +20,7 @@ public class MusicCategoryDto {
                 .name(musicCategory.getName())
                 .registerTime(BlogAdminUtil.formatLocalDateTimeToStrByPattern(musicCategory.getRegisterTime(), "yyyy.MM.dd HH:mm:ss"))
                 .updateTime(BlogAdminUtil.formatLocalDateTimeToStrByPattern(musicCategory.getUpdateTime(), "yyyy.MM.dd HH:mm:ss"))
+                .isBaseTimezone(musicCategory.getIsBaseTimezone())
                 .build();
     }
 }

@@ -7,6 +7,7 @@ import com.service.freeblog_admin.web.domain.category.Category;
 import com.service.freeblog_admin.web.domain.comment.Comment;
 import com.service.freeblog_admin.web.domain.tag.Tag;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
@@ -15,7 +16,7 @@ import java.util.List;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = {"category", "blog"})

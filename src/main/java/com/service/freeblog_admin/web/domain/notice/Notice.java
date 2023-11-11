@@ -7,13 +7,14 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Notice extends BaseTimeEntity {
@@ -38,6 +39,7 @@ public class Notice extends BaseTimeEntity {
                 .contents(noticeInput.getContents())
                 .summary(noticeInput.getSummary())
                 .uploadKey(noticeInput.getUploadKey())
+                .isBaseTimezone(true)
                 .build();
     }
 }

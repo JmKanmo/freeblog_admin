@@ -5,13 +5,14 @@ import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.domain.blog.Blog;
 import com.service.freeblog_admin.web.model.user.UserStatus;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString(exclude = "blog")

@@ -4,6 +4,7 @@ package com.service.freeblog_admin.web.domain.admin;
 import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.model.admin.AdminUserSignupInput;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
@@ -11,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Data
-@Builder
+@SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "AdminUser", indexes = {
@@ -34,6 +35,7 @@ public class AdminUser extends BaseTimeEntity {
                 .email(adminUserSignupInput.getEmail())
                 .nickname(adminUserSignupInput.getNickname())
                 .password(BCrypt.hashpw(adminUserSignupInput.getPassword(), BCrypt.gensalt()))
+                .isBaseTimezone(true)
                 .build();
     }
 }

@@ -16,7 +16,7 @@
                     </span>
 
                 <span class="notice_board_text_style notice_board_date" id="notice_board_date">
-                    {{registerTime}}
+                    {{convertTimeByBrowserTimezone registerTime 'YYYY-MM-DD HH:mm' isBaseTimezone}}
                 </span>
             </a>
         </li>

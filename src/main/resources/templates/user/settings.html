@@ -59,9 +59,7 @@
 
             <div class="user_info_block text_skip_block">
                 <span class="common_plain_text">가입일</span>
-                <span class="common_gray_text"
-                      th:text="${#strings.isEmpty(user_setting.registerTime) ? '없음' : user_setting.registerTime}"
-                      th:title="${#strings.isEmpty(user_setting.registerTime) ? '없음' : user_setting.registerTime}">2015-04-24 14:25</span>
+                <span class="common_gray_text" id="signUpDateInput">1970-00-00 00:00</span>
             </div>
         </div>
 
@@ -72,8 +70,7 @@
                 </button>
 
                 <span class="last_change_text">
-                        마지막 변경일 (<span class="common_plain_text" th:title="${user_setting.updatedTime}"
-                                       th:text="${#strings.isEmpty(user_setting.updatedTime) ? '없음' : user_setting.updatedTime}">2015-04-24 14:25</span>)
+                        마지막 변경일 (<span class="common_plain_text" id="lastModifiedInput">1970-00-00 00:00</span>)
                     </span>
             </div>
 
@@ -84,6 +81,14 @@
             </div>
         </div>
     </div>
+    <script th:inline="javascript">
+        const utilController = new UtilController();
+        const registerTime = [[${user_setting.registerTime}]]; // 가입일
+        const lastModifiedTime = [[${user_setting.updatedTime}]]; // 마지막 변경 시간
+        const isBaseTimezone = [[${user_setting.isBaseTimezone}]]; // 베이스 타임존 여부
+        document.getElementById("signUpDateInput").innerText = (!registerTime || registerTime === '') ? '없음' : utilController.convertTimeByBrowserTimezone(registerTime, 'YYYY-MM-DD HH:mm:ss', isBaseTimezone);
+        document.getElementById("lastModifiedInput").innerText = (!lastModifiedTime || lastModifiedTime === '') ? '없음' : utilController.convertTimeByBrowserTimezone(lastModifiedTime, 'YYYY-MM-DD HH:mm:ss', isBaseTimezone);
+    </script>
 </div>
 <div th:replace="fragments/footer::footer"></div>
 </body>
