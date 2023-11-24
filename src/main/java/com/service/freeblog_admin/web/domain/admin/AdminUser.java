@@ -8,7 +8,6 @@ import lombok.experimental.SuperBuilder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @Entity
 @Data

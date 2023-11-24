@@ -4,7 +4,6 @@ import com.service.freeblog_admin.util.ConstUtil;
 import com.service.freeblog_admin.util.domain.BaseTimeEntity;
 import com.service.freeblog_admin.web.model.notice.NoticeInput;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;

@@ -2,7 +2,6 @@ package com.service.freeblog_admin.web.service.admin;
 
 import com.service.freeblog_admin.config.admin.AdminUserConfig;
 import com.service.freeblog_admin.web.domain.admin.AdminUser;
-import com.service.freeblog_admin.web.domain.user.UserDomain;
 import com.service.freeblog_admin.web.dto.admin.AdminUserDto;
 import com.service.freeblog_admin.web.dto.user.UserBasicInfoInput;
 import com.service.freeblog_admin.web.dto.user.UserPasswordInput;
@@ -11,8 +10,6 @@ import com.service.freeblog_admin.web.error.constants.ServiceExceptionMessage;
 import com.service.freeblog_admin.web.error.model.admin.AdminUserException;
 import com.service.freeblog_admin.web.repository.admin.AdminUserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -22,8 +19,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.security.Principal;
 import java.time.LocalDateTime;
 import java.util.LinkedList;
 import java.util.List;

@@ -1,12 +1,10 @@
 package com.service.freeblog_admin.web.dto.notice;
 
-import com.service.freeblog_admin.web.domain.notice.Notice;
 import lombok.Builder;
 import lombok.Data;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Data
 @Builder
