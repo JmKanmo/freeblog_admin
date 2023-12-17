@@ -1,11 +1,9 @@
 package com.service.freeblog_admin.config.sftp;
 
-import com.service.freeblog_admin.config.yaml.YamlPropertySourceFactory;
 import lombok.Data;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @ConfigurationProperties(prefix = "yml")
@@ -25,6 +23,9 @@ public class SftpConfig {
 
     @Value("${util-config.aws_ec2_sftp.password}")
     private String password;
+
+    @Value("${util-config.aws_ec2_sftp.url}")
+    private String url;
 
     @Value("${util-config.aws_ec2_sftp.directory}")
     private String directory;
